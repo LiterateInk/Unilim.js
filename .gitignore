@@ -1,3 +1,2 @@
-dist
-node_modules
-_exported*.json
+node_modules/
+dist/

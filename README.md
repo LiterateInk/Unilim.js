@@ -1,12 +1,10 @@
-# Pawnilim - A purrfect API wrapper for Unilim APIs (Biome & CAS)
+<img alt="Pawnilim: A purrfect API wrapper for Unilim" src="https://raw.githubusercontent.com/LiterateInk/Pawnilim/index/.github/assets/banner.svg" width="100%" />
 
-A simple wrapper around [Unilim's Biome](https://biome.unilim.fr/) internal API.
-
-> This project is not affiliated with Unilim or the University of Limoges in any way.
+*This library **is not** affiliated with [Unilim](https://unilim.fr/) in any way.*
 
 ## Installation
 
-Use your favorite package manager to install [Pawnilim from NPM](https://www.npmjs.com/package/pawnilim).
+Use your favorite package manager to install this library from NPM.
 
 ```bash
 # pnpm
@@ -17,14 +15,15 @@ yarn add pawnilim
 
 # npm
 npm install pawnilim
+
+# Bun
+bun add pawnilim
 ```
 
-## Documentation & Guides
+## Documentation
 
-You can find the documentation, some guides and small examples at [literate.ink/pawnilim](https://literate.ink/pawnilim) for more information about the API and how to use it.
+You can find documentation with guides at [docs.literate.ink/pawnilim](https://docs.literate.ink/pawnilim).
 
-If you need complete examples, then we got **a lot** of those in the [`examples`](https://github.com/LiterateInk/Pawnilim/tree/js/examples) folder, hoping you can find your joy in there.
+If it's not enough you can also take a look at the [`examples`](https://github.com/LiterateInk/Pawnilim/tree/js/examples) folder in the GitHub repository for inspiration.
 
-If none of those are helpful, you can always [open an issue](https://github.com/LiterateInk/Pawnilim/issues) to ask for help.
-
-You can also join [LiterateInk's Discord server](https://literate.ink/discord) to talk about Pawnilim, get help and be notified about the latest updates !
+If none of those are helpful, you can always [open an issue](https://github.com/LiterateInk/Pawnilim/issues) to ask for help or join the [LiterateInk Discord server](https://literate.ink/discord).

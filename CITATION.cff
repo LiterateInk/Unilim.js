@@ -5,19 +5,19 @@ message: >-
   metadata from this file.
 type: software
 authors:
-  - given-names: Mikkel
-    family-names: RINGAUD
-    email: mikkel@milescode.dev
+  - name: LiterateInk
+    website: "https://literate.ink"
+    email: contact@literate.ink
 repository-code: 'https://github.com/LiterateInk/Pawnilim'
-url: 'https://literate.ink/pawnilim'
+url: 'https://docs.literate.ink/pawnilim'
 repository-artifact: 'https://www.npmjs.com/package/pawnilim'
 abstract: >-
-  A simple wrapper around Unilim's Biome internal
-  API.
+  A purrfect API wrapper for Unilim.
 keywords:
   - unilim
   - biome
-  - university
-  - wrapper
   - api
-license: GPL-3.0
+  - wrapper
+  - student
+  - university
+license: GPL-3.0-or-later

@@ -1,23 +1,24 @@
 {
   "name": "pawnilim",
   "version": "0.2.0",
-  "description": "A simple wrapper around Unilim's Biome internal API.",
-  "repository": "github:LiterateInk/Pawnilim",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "description": "A purrfect API wrapper for Unilim.",
+  "repository": "https://github.com/LiterateInk/Pawnilim",
+  "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
+    "./biome": {
+      "types": "./dist/biome/index.d.ts",
+      "require": "./dist/biome/index.js",
+      "import": "./dist/biome/index.mjs"
+    },
+    "./cas": {
+      "types": "./dist/cas/index.d.ts",
+      "require": "./dist/cas/index.js",
+      "import": "./dist/cas/index.mjs"
     }
   },
   "scripts": {
-    "build": "tsup src/index.ts --dts --minify terser --clean --format cjs,esm --sourcemap",
-    "release": "release-it",
-    "lint": "tsc && eslint .",
-    "tsx": "tsx"
+    "build": "tsup",
+    "checks": "tsc && eslint ."
   },
   "files": [
     "dist"
@@ -28,36 +29,16 @@
     "api",
     "wrapper",
     "student",
-    "university",
-    "France"
+    "university"
   ],
-  "author": "Mikkel RINGAUD <mikkel@milescode.dev> (https://github.com/Vexcited)",
-  "homepage": "https://literate.ink/pawnilim",
+  "author": "LiterateInk <contact@literate.ink> (https://literate.ink)",
+  "homepage": "https://docs.literate.ink/pawnilim",
   "bugs": {
     "url": "https://github.com/LiterateInk/Pawnilim/issues"
   },
-  "license": "GPL-3.0",
+  "license": "GPL-3.0-or-later",
   "engines": {
     "node": ">=18"
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release v${version}",
-      "tagAnnotation": "Release v${version}",
-      "tagName": "js-v${version}"
-    },
-    "github": {
-      "release": true,
-      "draft": false,
-      "releaseName": "js v${version}"
-    },
-    "npm": {
-      "publish": true
-    },
-    "hooks": {
-      "before:init": "pnpm lint",
-      "after:bump": "pnpm build"
-    }
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^2.1.0",
@@ -65,10 +46,8 @@
     "@typescript-eslint/parser": "^7.13.0",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
-    "release-it": "^17.3.0",
     "terser": "^5.31.1",
     "tsup": "^8.1.0",
-    "tsx": "^4.15.4",
     "typescript": "^5.4.5"
   },
   "dependencies": {
