@@ -1,45 +1,57 @@
 import { CAS_HOST } from "~/utils/constants";
-import { findValueBetween } from "~/utils/finder";
+import { type Fetcher, defaultFetcher, findValueBetween, getCookiesFromResponse } from "@literate.ink/utilities";
+
+const retrieveLoginToken = async (fetcher: Fetcher, retries = 0): Promise<string> => {
+  const response = await fetcher({
+    url: new URL(CAS_HOST)
+  });
+
+  // find the token that allows to send the login request.
+  const token = findValueBetween(response.content, "name=\"token\" value=\"", "\" />");
+
+  if (!token) {
+    // we retry 5 times before throwing the actual error.
+    if (retries < 5) {
+      return retrieveLoginToken(fetcher, retries + 1);
+    }
+
+    throw new Error("CAS token not found in HTML");
+  }
+
+  return token;
+};
 
 /**
- * authenticates to `https://cas.unilim.fr/` using the given `username` and `password`.
- * @returns the "lemonldap" cookie that is a token for further authenticated requests.
+ * authenticates to `https://cas.unilim.fr` using the given `username` and `password`.
+ * @returns the `lemonldap` cookie that is a token for further authenticated requests.
  */
-export const cas_login = async (username: string, password: string): Promise<string> => {
-  let response: Response;
+export const login = async (username: string, password: string, fetcher: Fetcher = defaultFetcher): Promise<string> => {
+  const token = await retrieveLoginToken(fetcher);
 
-  // 1. request the login page
-  response = await fetch(CAS_HOST);
-
-  // 2. read the html content.
-  const html = await response.text();
-
-  // 3. find the token that allows to send the login request.
-  const loginToken = findValueBetween(html, "name=\"token\" value=\"", "\" />");
-
-  // 4. send the login request.
-  response = await fetch(CAS_HOST, {
+  // send the login request.
+  const response = await fetcher({
+    url: new URL(CAS_HOST),
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
-    body: new URLSearchParams({
-      "url": "aHR0cHM6Ly9jYXMudW5pbGltLmZyL2Nhcw==", // -> btoa("https://cas.unilim.fr/cas")
-      "timezone": "2",
-      "skin": "unilim",
-      "token": loginToken,
-      "user": username,
-      "password": password
-    }),
+    content: new URLSearchParams({
+      url: "aHR0cHM6Ly9jYXMudW5pbGltLmZyL2Nhcw==", // -> btoa("https://cas.unilim.fr/cas")
+      token,
+      user: username,
+      password
+    }).toString(),
     // prevent redirections to any random page
     // since we need to read the "set-cookie" from THIS response.
     redirect: "manual"
   });
 
-  // 5. read the "lemonldap" cookie from the response.
-  const lemon_ldap = response.headers.get("set-cookie")?.split(";")[0].split("=")[1];
-  if (!lemon_ldap) throw new Error("Bad authentication.");
+  // read the "lemonldap" cookie from the response.
+  const cookies = getCookiesFromResponse(response);
+  const lemonCookie = cookies[0].split("=")[1];
 
-  // 6. return the cookie content.
-  return lemon_ldap;
+  if (!lemonCookie)
+    throw new Error("bad authentication");
+
+  return lemonCookie;
 };

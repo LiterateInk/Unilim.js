@@ -70,5 +70,8 @@
     "tsup": "^8.1.0",
     "tsx": "^4.15.4",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@literate.ink/utilities": "1.0.0-11713907881.1"
   }
 }

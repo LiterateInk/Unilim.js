@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@literate.ink/utilities':
+        specifier: 1.0.0-11713907881.1
+        version: 1.0.0-11713907881.1
     devDependencies:
       '@stylistic/eslint-plugin':
         specifier: ^2.1.0
@@ -253,6 +257,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@literate.ink/utilities@1.0.0-11713907881.1':
+    resolution: {integrity: sha512-+RdZqu5dor5YQfL0CRSGPb9Gl6qCsXusziJZt84KxmJsL55ElPSc35AR4CNITzsYg7rAXVnoUCf8fXpaSeWJsg==}
 
   '@ljharb/through@2.3.13':
     resolution: {integrity: sha512-/gKJun8NNiWGZJkGzI/Ragc53cOdcLNdzjLaIa+GEjguQs0ulsurx8WN0jijdK9yPqDvziX995sMRLyLt1uZMQ==}
@@ -1943,6 +1950,9 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  set-cookie-parser@2.7.1:
+    resolution: {integrity: sha512-IOc8uWeOZgnb3ptbCURJWNjWUPcO3ZnTTdzsurqERrP6nPyv+paC55vJM0LpOlT2ne+Ix+9+CRG1MNLlyZ4GjQ==}
+
   set-function-length@1.2.2:
     resolution: {integrity: sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==}
     engines: {node: '>= 0.4'}
@@ -2458,6 +2468,10 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
+
+  '@literate.ink/utilities@1.0.0-11713907881.1':
+    dependencies:
+      set-cookie-parser: 2.7.1
 
   '@ljharb/through@2.3.13':
     dependencies:
@@ -4316,6 +4330,8 @@ snapshots:
       semver: 7.6.2
 
   semver@7.6.2: {}
+
+  set-cookie-parser@2.7.1: {}
 
   set-function-length@1.2.2:
     dependencies:
