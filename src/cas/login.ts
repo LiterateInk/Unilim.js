@@ -1,9 +1,9 @@
-import { CAS_HOST } from "~/utils/constants";
+import { HOST } from "~cas/constants";
 import { type Fetcher, defaultFetcher, findValueBetween, getCookiesFromResponse } from "@literate.ink/utilities";
 
 const retrieveLoginToken = async (fetcher: Fetcher, retries = 0): Promise<string> => {
   const response = await fetcher({
-    url: new URL(CAS_HOST)
+    url: new URL(HOST)
   });
 
   // find the token that allows to send the login request.
@@ -30,7 +30,7 @@ export const login = async (username: string, password: string, fetcher: Fetcher
 
   // send the login request.
   const response = await fetcher({
-    url: new URL(CAS_HOST),
+    url: new URL(HOST),
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"

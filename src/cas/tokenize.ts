@@ -1,6 +1,6 @@
 import { defaultFetcher, type Fetcher } from "@literate.ink/utilities";
-import type { ExternalClient, Tokens } from "./models";
-import { HOST } from "./constants";
+import type { ExternalClient, Tokens } from "~cas/models";
+import { HOST } from "~cas/constants";
 
 export const tokenize = async (code: string, client: ExternalClient, fetcher: Fetcher = defaultFetcher): Promise<Tokens> => {
   const response = await fetcher({

@@ -1,4 +1,4 @@
-import type { ExternalClient } from "./models";
+import type { ExternalClient } from "~cas/models";
 
 export const HOST = "https://cas.unilim.fr";
 
