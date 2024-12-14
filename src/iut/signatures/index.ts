@@ -1,1 +1,19 @@
-export {};
+import { defaultFetcher, type Fetcher, getHeaderFromResponse } from "@literate.ink/utilities";
+import { HOST } from "./constants";
+
+export const createAuthorizeClientState = async (fetcher: Fetcher = defaultFetcher) => {
+  const response = await fetcher({
+    url: new URL(`${HOST}/login`),
+    redirect: "manual"
+  });
+
+  const location = getHeaderFromResponse(response, "location");
+  if (!location) throw new Error("no location found");
+
+  const url = new URL(location);
+
+  const state = url.searchParams.get("state");
+  if (!state) throw new Error("no state found");
+
+  return state;
+};
