@@ -7,21 +7,17 @@ import { HOST } from "~cas/constants";
  * using `/oauth2/authorize` endpoint.
  *
  * @param cookie token that can be found using `login` function.
- *
- * @returns code to exchange for an access token
- * using `/oauth2/token` endpoint.
+ * @returns callback URL with filled information.
  */
-export const authorize = async (cookie: string, client: ExternalClient, fetcher: Fetcher = defaultFetcher): Promise<string> => {
-  let url: URL;
-
-  url = new URL(HOST + "/oauth2/authorize");
+export const authorize = async (cookie: string, client: ExternalClient, state = "", fetcher: Fetcher = defaultFetcher): Promise<URL> => {
+  const url = new URL(HOST + "/oauth2/authorize");
   url.searchParams.set("redirect_uri", client.redirectionURL);
   url.searchParams.set("client_id", client.id);
   url.searchParams.set("response_type", "code");
   url.searchParams.set("scope", client.scopes.join(" "));
   url.searchParams.set("code_challenge_method", "plain");
   url.searchParams.set("code_challenge", "literateink");
-  url.searchParams.set("state", "");
+  url.searchParams.set("state", state);
 
   const response = await fetcher({
     url,
@@ -32,9 +28,5 @@ export const authorize = async (cookie: string, client: ExternalClient, fetcher:
   const redirection = getHeaderFromResponse(response, "location");
   if (!redirection) throw new Error("no redirection found");
 
-  url = new URL(redirection);
-  const code = url.searchParams.get("code");
-
-  if (!code) throw new Error("no code found");
-  return code;
+  return new URL(redirection);
 };
