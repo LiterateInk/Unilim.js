@@ -22,7 +22,7 @@ export const getTimetable = (page: Page): Timetable => {
   };
 };
 
-export const getTimetableFromBuffer = async (pdf_buffer: ArrayBuffer): Promise<Timetable> => {
-  const pages = await parsePDF(pdf_buffer);
+export const getTimetableFromBuffer = async (buffer: ArrayBuffer | ArrayBufferLike | Buffer): Promise<Timetable> => {
+  const pages = await parsePDF(buffer);
   return getTimetable(pages[0]);
 };
