@@ -8,6 +8,7 @@
     "paths": {
       "~/*": ["./src/*"],
       "~cas/*": ["./src/cas/*"],
+      "~iut/*": ["./src/iut/*"],
       "~biome/*": ["./src/biome/*"],
     },
     
