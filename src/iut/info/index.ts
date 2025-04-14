@@ -1,1 +1,1 @@
-export * as timetable from "./timetable"
+export * as timetable from "./timetable";
