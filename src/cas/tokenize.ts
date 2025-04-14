@@ -1,5 +1,6 @@
-import { defaultFetcher, type Fetcher } from "@literate.ink/utilities";
 import type { ExternalClient, Tokens } from "~cas/models";
+
+import { defaultFetcher, type Fetcher } from "@literate.ink/utilities";
 import { HOST } from "~cas/constants";
 
 export const tokenize = async (callbackURL: URL, client: ExternalClient, fetcher: Fetcher = defaultFetcher): Promise<Tokens> => {
@@ -9,16 +10,16 @@ export const tokenize = async (callbackURL: URL, client: ExternalClient, fetcher
     throw new Error("no code found");
 
   const response = await fetcher({
-    url: new URL(HOST + "/oauth2/token"),
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
     content: new URLSearchParams({
-      grant_type: "authorization_code",
-      code,
       client_id: client.id,
-      redirect_uri: client.redirectionURL,
-      code_verifier: "literateink"
-    }).toString()
+      code,
+      code_verifier: "literateink",
+      grant_type: "authorization_code",
+      redirect_uri: client.redirectionURL
+    }).toString(),
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    method: "POST",
+    url: new URL(HOST + "/oauth2/token")
   });
 
   return JSON.parse(response.content);

@@ -1,6 +1,9 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
+  clean: true,
+
+  dts: true,
   entry: [
     "src/biome/index.ts",
     "src/cas/index.ts",
@@ -8,14 +11,11 @@ export default defineConfig({
     "src/iut/info/edt/index.ts"
   ],
 
-  outDir: "dist",
   format: ["cjs", "esm"],
-
-  treeshake: true,
-  splitting: false,
-
-  sourcemap: true,
   minify: "terser",
-  clean: true,
-  dts: true
+
+  outDir: "dist",
+  sourcemap: true,
+  splitting: false,
+  treeshake: true
 });

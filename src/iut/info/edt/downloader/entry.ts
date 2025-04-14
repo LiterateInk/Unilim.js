@@ -1,19 +1,18 @@
-import { DateTime } from "luxon";
-
-import { YEARS, EDT_ENDPOINT_URL } from "~iut/info/edt/downloader/constants";
+import { EDT_ENDPOINT_URL, YEARS } from "~iut/info/edt/downloader/constants";
 import { getTimetableFromBuffer } from "~iut/info/edt/parser";
 import { DATE_TIME_OPTIONS } from "~iut/info/edt/utils/date";
+import { DateTime } from "luxon";
 
 export class TimetableEntry {
   /** Includes the `.pdf` extension. */
   public file_name: string;
+  public from_year: YEARS;
   /** Date displayed on the FTP, corresponds to the last update made to the file. */
   public last_updated: DateTime;
-  /** From the beginning of the school year. Usually starts from September. */
-  public week_number: number;
-  public from_year: YEARS;
   /** The direct link to the timetable. */
   public link: string;
+  /** From the beginning of the school year. Usually starts from September. */
+  public week_number: number;
 
   private response_buffer: ArrayBuffer | undefined;
   private response_headers: Headers | undefined;
@@ -28,15 +27,6 @@ export class TimetableEntry {
     this.week_number = parseInt(file_name.replace(/(A(.*)_S)|(.pdf)/g, ""));
     this.from_year = ("A" + file_name[1]) as YEARS;
     this.link = `${EDT_ENDPOINT_URL}/${this.from_year}/${this.file_name}`;
-  }
-
-  private async retrieveResponseFields(): Promise<void> {
-    if (!this.response_headers && !this.response_buffer) {
-      const response = await fetch(this.link);
-
-      this.response_headers = response.headers;
-      this.response_buffer = await response.arrayBuffer();
-    }
   }
 
   /**
@@ -67,5 +57,14 @@ export class TimetableEntry {
     }
 
     return DateTime.fromHTTP(last_updated);
+  }
+
+  private async retrieveResponseFields(): Promise<void> {
+    if (!this.response_headers && !this.response_buffer) {
+      const response = await fetch(this.link);
+
+      this.response_headers = response.headers;
+      this.response_buffer = await response.arrayBuffer();
+    }
   }
 }

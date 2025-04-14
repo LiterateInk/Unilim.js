@@ -1,10 +1,11 @@
 import { defaultFetcher, type Fetcher, getHeaderFromResponse } from "@literate.ink/utilities";
+
 import { HOST } from "./constants";
 
 export const createAuthorizeClientState = async (fetcher: Fetcher = defaultFetcher) => {
   const response = await fetcher({
-    url: new URL(`${HOST}/login`),
-    redirect: "manual"
+    redirect: "manual",
+    url: new URL(`${HOST}/login`)
   });
 
   const location = getHeaderFromResponse(response, "location");

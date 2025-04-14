@@ -1,5 +1,6 @@
-import { defaultFetcher, type Fetcher, getHeaderFromResponse } from "@literate.ink/utilities";
 import type { ExternalClient } from "~cas/models";
+
+import { defaultFetcher, type Fetcher, getHeaderFromResponse } from "@literate.ink/utilities";
 import { HOST } from "~cas/constants";
 
 /**
@@ -20,9 +21,9 @@ export const authorize = async (cookie: string, client: ExternalClient, state = 
   url.searchParams.set("state", state);
 
   const response = await fetcher({
-    url,
+    headers: { Cookie: `lemonldap=${cookie}` },
     redirect: "manual",
-    headers: { Cookie: `lemonldap=${cookie}` }
+    url
   });
 
   const redirection = getHeaderFromResponse(response, "location");

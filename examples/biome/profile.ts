@@ -1,7 +1,7 @@
-import { credentials } from "../_credentials";
-
-import * as cas from "~/cas";
 import * as biome from "~/biome";
+import * as cas from "~/cas";
+
+import { credentials } from "../_credentials";
 
 void async function main () {
   // we authenticate to the CAS.

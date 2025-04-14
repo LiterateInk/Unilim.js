@@ -1,11 +1,12 @@
+import type { Profile } from "~biome/models";
+
 import { defaultFetcher, type Fetcher } from "@literate.ink/utilities";
 import { API_ENDPOINT } from "~biome/constants";
-import type { Profile } from "~biome/models";
 
 export const profile = async (token: string, username: string, fetcher: Fetcher = defaultFetcher): Promise<Profile> => {
   const response = await fetcher({
-    url: new URL(`${API_ENDPOINT}/api/profile/${username}`),
-    headers: { Authorization: `Bearer ${token}` }
+    headers: { Authorization: `Bearer ${token}` },
+    url: new URL(`${API_ENDPOINT}/api/profile/${username}`)
   });
 
   if (response.status !== 200) {

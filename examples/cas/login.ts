@@ -1,5 +1,6 @@
-import { credentials } from "../_credentials";
 import * as cas from "~/cas";
+
+import { credentials } from "../_credentials";
 
 void async function main () {
   // 1. we authenticate to the CAS.

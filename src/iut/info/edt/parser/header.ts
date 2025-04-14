@@ -1,20 +1,20 @@
 import type { Page } from "@literate.ink/pdf-inspector";
-import { DateTime } from "luxon";
 
 import { type FillBounds, getFillBounds, getTextsInFillBounds } from "~iut/info/edt/parser/bounds";
-import { DATE_TIME_OPTIONS } from "~iut/info/edt/utils/date";
 import { COLORS } from "~iut/info/edt/parser/constants";
+import { DATE_TIME_OPTIONS } from "~iut/info/edt/utils/date";
+import { DateTime } from "luxon";
 
 export interface TimetableHeader {
+  bounds: FillBounds
+
   data: {
+    end_date: DateTime;
+    start_date: DateTime;
+
     week_number: number;
     week_number_in_year: number;
-
-    start_date: DateTime;
-    end_date: DateTime;
   },
-
-  bounds: FillBounds
 }
 
 // Format for the date in the header.
@@ -44,11 +44,11 @@ export const getTimetableHeader = (page: Page): TimetableHeader => {
     bounds: header_fill_bounds,
 
     data: {
-      week_number: parseInt(header_text_matches[1]),
-      week_number_in_year: parseInt(header_text_matches[2]),
-
+      end_date: week_end_date,
       start_date: week_start_date,
-      end_date: week_end_date
+
+      week_number: parseInt(header_text_matches[1]),
+      week_number_in_year: parseInt(header_text_matches[2])
     }
   };
 };

@@ -1,38 +1,55 @@
 {
-  "name": "pawnilim",
+  "name": "unilim",
   "version": "0.2.0",
-  "description": "A purrfect API wrapper for Unilim.",
-  "repository": "https://github.com/LiterateInk/Pawnilim",
-  "sideEffects": false,
+  "author": "LiterateInk <contact@literate.ink> (https://literate.ink)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiterateInk/Unilim.JS.git"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin": "^4.2.0",
+    "@types/bun": "^1.2.9",
+    "@types/luxon": "^3.4.2",
+    "@types/node": "^20.14.2",
+    "@typescript-eslint/parser": "^8.29.1",
+    "dotenv": "^16.4.5",
+    "eslint": "^9.24.0",
+    "eslint-plugin-perfectionist": "^4.11.0",
+    "jiti": "^2.4.2",
+    "terser": "^5.39.0",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.3"
+  },
   "exports": {
     "./biome": {
       "types": "./dist/biome/index.d.ts",
-      "require": "./dist/biome/index.js",
-      "import": "./dist/biome/index.mjs"
+      "import": "./dist/biome/index.mjs",
+      "default": "./dist/biome/index.js"
     },
     "./cas": {
       "types": "./dist/cas/index.d.ts",
-      "require": "./dist/cas/index.js",
-      "import": "./dist/cas/index.mjs"
+      "import": "./dist/cas/index.mjs",
+      "default": "./dist/cas/index.js"
     },
     "./iut/signatures": {
       "types": "./dist/iut/signatures/index.d.ts",
-      "require": "./dist/iut/signatures/index.js",
-      "import": "./dist/iut/signatures/index.mjs"
+      "import": "./dist/iut/signatures/index.mjs",
+      "default": "./dist/iut/signatures/index.js"
     },
     "./iut/info/edt": {
       "types": "./dist/iut/info/edt/index.d.ts",
-      "require": "./dist/iut/info/edt/index.js",
-      "import": "./dist/iut/info/edt/index.mjs"
+      "import": "./dist/iut/info/edt/index.mjs",
+      "default": "./dist/iut/info/edt/index.js"
     }
   },
-  "scripts": {
-    "build": "tsup",
-    "checks": "tsc && eslint ."
+  "bugs": {
+    "url": "https://github.com/LiterateInk/Unilim.JS/issues"
   },
+  "description": "A purrfect API wrapper for Unilim.",
   "files": [
     "dist"
   ],
+  "homepage": "https://unilim.docs.literate.ink/",
   "keywords": [
     "unilim",
     "biome",
@@ -41,26 +58,11 @@
     "student",
     "university"
   ],
-  "author": "LiterateInk <contact@literate.ink> (https://literate.ink)",
-  "homepage": "https://docs.literate.ink/pawnilim",
-  "bugs": {
-    "url": "https://github.com/LiterateInk/Pawnilim/issues"
-  },
   "license": "GPL-3.0-or-later",
-  "engines": {
-    "node": ">=18"
+  "scripts": {
+    "build": "tsup"
   },
-  "devDependencies": {
-    "@stylistic/eslint-plugin": "^2.1.0",
-    "@types/luxon": "^3.4.2",
-    "@types/node": "^20.14.2",
-    "@typescript-eslint/parser": "^7.13.0",
-    "dotenv": "^16.4.5",
-    "eslint": "^8.57.0",
-    "terser": "^5.31.1",
-    "tsup": "^8.1.0",
-    "typescript": "^5.4.5"
-  },
+  "sideEffects": false,
   "dependencies": {
     "@literate.ink/pdf-inspector": "^1.0.0",
     "@literate.ink/utilities": "1.0.0-11713907881.1",

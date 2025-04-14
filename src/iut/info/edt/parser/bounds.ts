@@ -1,10 +1,10 @@
 import type { Fill, Page, Text } from "@literate.ink/pdf-inspector";
 
 export interface FillBounds {
-  start_x: number;
-  start_y: number;
   end_x: number;
   end_y: number;
+  start_x: number;
+  start_y: number;
 }
 
 /**
@@ -12,10 +12,10 @@ export interface FillBounds {
  * @returns - Bounds of the given fill
  */
 export const getFillBounds = (fill: Fill): FillBounds => ({
-  start_x: fill.x,
-  start_y: fill.y,
   end_x: fill.x + fill.w,
-  end_y: fill.y + fill.h
+  end_y: fill.y + fill.h,
+  start_x: fill.x,
+  start_y: fill.y
 });
 
 /**

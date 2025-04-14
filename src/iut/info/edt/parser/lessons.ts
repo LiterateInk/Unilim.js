@@ -1,74 +1,70 @@
-import type { DateTime, WeekdayNumbers } from "luxon";
 import type { Page } from "@literate.ink/pdf-inspector";
+import type { TimetableGroup } from "~iut/info/edt/parser/groups";
+import type { TimetableHeader } from "~iut/info/edt/parser/header";
+import type { DateTime, WeekdayNumbers } from "luxon";
 
 import { getFillBounds, getTextsInFillBounds } from "~iut/info/edt/parser/bounds";
 import { COLORS, LESSON_TYPES, SUBGROUPS } from "~iut/info/edt/parser/constants";
-import type { TimetableHeader } from "~iut/info/edt/parser/header";
-import type { TimetableGroup } from "~iut/info/edt/parser/groups";
-
-import { BUT_INFO_REF } from "~iut/info/edt/utils/references";
 import { round } from "~iut/info/edt/utils/numbers";
+import { BUT_INFO_REF } from "~iut/info/edt/utils/references";
+
+export type TimetableLesson = {
+  end_date: DateTime;
+  start_date: DateTime;
+} & (
+  | TimetableLessonCM
+  | TimetableLessonDS
+  | TimetableLessonOTHER
+  | TimetableLessonSAE
+  | TimetableLessonTD
+  | TimetableLessonTP
+);
 
 export interface TimetableLessonCM {
-  type: LESSON_TYPES.CM;
-
   content: {
-    type: string;
-    raw_lesson: string;
     lesson_from_reference?: string;
-    teacher: string;
+    raw_lesson: string;
     room: string;
-  }
-}
-
-export interface TimetableLessonTP {
-  type: LESSON_TYPES.TP;
-
-  group: {
-    main: number;
-    sub: SUBGROUPS;
-  }
-
-  content: {
+    teacher: string;
     type: string;
-    teacher: string;
-    lesson_from_reference?: string
-    room: string;
-  }
-}
-
-export interface TimetableLessonTD {
-  type: LESSON_TYPES.TD;
-
-  group: {
-    main: number;
   }
 
-  content: {
-    type: string;
-    teacher: string;
-    lesson_from_reference?: string
-    room: string;
-  }
+  type: LESSON_TYPES.CM;
 }
 
 export interface TimetableLessonDS {
-  type: LESSON_TYPES.DS;
+  content: {
+    lesson_from_reference?: string
+    room: string;
+    teacher: string;
+    type: string;
+  }
 
   group: {
     main: number;
   }
 
+  type: LESSON_TYPES.DS;
+}
+
+export interface TimetableLessonOTHER {
   content: {
-    type: string;
-    teacher: string;
-    lesson_from_reference?: string
+    description: string;
     room: string;
+    teacher: string;
   }
+
+  type: LESSON_TYPES.OTHER;
 }
 
 export interface TimetableLessonSAE {
-  type: LESSON_TYPES.SAE;
+  content: {
+    lesson_from_reference?: string;
+    raw_lesson?: string;
+    room: string;
+    teacher: string;
+    type: string;
+  }
 
   /** When `undefined`, it means that it's for every groups. */
   group: {
@@ -77,36 +73,39 @@ export interface TimetableLessonSAE {
     sub?: SUBGROUPS;
   } | undefined
 
+  type: LESSON_TYPES.SAE;
+}
+
+export interface TimetableLessonTD {
   content: {
+    lesson_from_reference?: string
+    room: string;
+    teacher: string;
     type: string;
-    teacher: string;
-    lesson_from_reference?: string;
-    raw_lesson?: string;
-    room: string;
   }
+
+  group: {
+    main: number;
+  }
+
+  type: LESSON_TYPES.TD;
 }
 
-export interface TimetableLessonOTHER {
-  type: LESSON_TYPES.OTHER;
-
+export interface TimetableLessonTP {
   content: {
-    description: string;
-    teacher: string;
+    lesson_from_reference?: string
     room: string;
+    teacher: string;
+    type: string;
   }
-}
 
-export type TimetableLesson = {
-  start_date: DateTime;
-  end_date: DateTime;
-} & (
-  | TimetableLessonCM
-  | TimetableLessonTP
-  | TimetableLessonTD
-  | TimetableLessonDS
-  | TimetableLessonSAE
-  | TimetableLessonOTHER
-);
+  group: {
+    main: number;
+    sub: SUBGROUPS;
+  }
+
+  type: LESSON_TYPES.TP;
+}
 
 export const getTimetableLessons = (page: Page, header: TimetableHeader, timings: Record<string, string>, groups: Record<string, TimetableGroup>): TimetableLesson[] => {
   const lessons: TimetableLesson[] = [];
@@ -117,7 +116,7 @@ export const getTimetableLessons = (page: Page, header: TimetableHeader, timings
 
     const color = fill.oc.toLowerCase();
     // We only care about the colors that are in our COLORS object.
-    if (![COLORS.CM, COLORS.TD, COLORS.TP, COLORS.DS, COLORS.SAE].includes(color)) continue;
+    if (![COLORS.CM, COLORS.DS, COLORS.SAE, COLORS.TD, COLORS.TP].includes(color)) continue;
 
     const bounds = getFillBounds(fill);
     const contained_texts = getTextsInFillBounds(page, bounds, 4, color === COLORS.CM ? 6 : 4);
@@ -155,46 +154,9 @@ export const getTimetableLessons = (page: Page, header: TimetableHeader, timings
 
         const lesson_name = [...text_from_after_separator, ...texts].map((text) => text.trim()).filter(Boolean).join(" ");
         const lesson: TimetableLesson = {
-          type: LESSON_TYPES.CM,
-          start_date, end_date,
-          content: { type, raw_lesson: lesson_name, teacher, room, lesson_from_reference: BUT_INFO_REF[type as keyof typeof BUT_INFO_REF] }
-        };
-
-        lessons.push(lesson);
-        break;
-      }
-
-      case COLORS.TP: {
-        const [type, teacher, room] = texts[0].split(" - ");
-
-        const lesson: TimetableLesson = {
-          type: LESSON_TYPES.TP,
-          start_date, end_date,
-
-          group: {
-            main: group.main,
-            sub: group.sub
-          },
-
-          content: { type, teacher, room, lesson_from_reference: BUT_INFO_REF[type as keyof typeof BUT_INFO_REF] }
-        };
-
-        lessons.push(lesson);
-        break;
-      }
-
-      case COLORS.TD: {
-        const [type, teacher, room] = texts[0].split("-").map((text) => text.trim());
-
-        const lesson: TimetableLesson = {
-          type: LESSON_TYPES.TD,
-          start_date, end_date,
-
-          group: {
-            main: group.main
-          },
-
-          content: { type, teacher, room, lesson_from_reference: BUT_INFO_REF[type as keyof typeof BUT_INFO_REF] }
+          content: { lesson_from_reference: BUT_INFO_REF[type as keyof typeof BUT_INFO_REF], raw_lesson: lesson_name, room, teacher, type },
+          end_date, start_date,
+          type: LESSON_TYPES.CM
         };
 
         lessons.push(lesson);
@@ -205,14 +167,14 @@ export const getTimetableLessons = (page: Page, header: TimetableHeader, timings
         const [type, teacher, room] = texts[0].split("-").map((text) => text.trim());
 
         const lesson: TimetableLesson = {
-          type: LESSON_TYPES.DS,
-          start_date, end_date,
-
-          group: {
+          content: { lesson_from_reference: BUT_INFO_REF[type as keyof typeof BUT_INFO_REF], room, teacher, type },
+          end_date, group: {
             main: group.main
           },
 
-          content: { type, teacher, room, lesson_from_reference: BUT_INFO_REF[type as keyof typeof BUT_INFO_REF] }
+          start_date,
+
+          type: LESSON_TYPES.DS
         };
 
         lessons.push(lesson);
@@ -240,10 +202,13 @@ export const getTimetableLessons = (page: Page, header: TimetableHeader, timings
           const lesson_from_reference = BUT_INFO_REF[type as keyof typeof BUT_INFO_REF];
 
           lesson = {
-            type: LESSON_TYPES.SAE,
-            start_date, end_date,
-
-            group: {
+            content: {
+              lesson_from_reference,
+              room,
+              teacher,
+              type
+            },
+            end_date, group: {
               main: group.main,
               // When there's no group inside the bounds,
               // then it's for sure for a single subgroup.
@@ -251,12 +216,9 @@ export const getTimetableLessons = (page: Page, header: TimetableHeader, timings
               sub: groupsInsideBounds === 0 ? group.sub : undefined
             },
 
-            content: {
-              type,
-              room,
-              teacher,
-              lesson_from_reference
-            }
+            start_date,
+
+            type: LESSON_TYPES.SAE
           };
         }
         else {
@@ -279,31 +241,68 @@ export const getTimetableLessons = (page: Page, header: TimetableHeader, timings
             description = description.split(" - ").slice(1).join(" ");
 
             lesson = {
-              type: LESSON_TYPES.SAE,
-              start_date, end_date,
-
-              // Only full year lessons have more than one text in the bounds.
+              content: {
+                lesson_from_reference,
+                raw_lesson: description,
+                room,
+                teacher,
+                type: first_word
+              },
+              end_date, // Only full year lessons have more than one text in the bounds.
               group: undefined,
 
-              content: {
-                type: first_word,
-                teacher,
-                room,
-                lesson_from_reference,
-                raw_lesson: description
-              }
+              start_date,
+
+              type: LESSON_TYPES.SAE
             };
           }
           // If it's not in the reference, then we can't really know what it is.
           else {
             lesson = {
-              type: LESSON_TYPES.OTHER,
-              start_date, end_date,
+              content: { description, room, teacher },
+              end_date, start_date,
 
-              content: { room, teacher, description }
+              type: LESSON_TYPES.OTHER
             };
           }
         }
+
+        lessons.push(lesson);
+        break;
+      }
+
+      case COLORS.TD: {
+        const [type, teacher, room] = texts[0].split("-").map((text) => text.trim());
+
+        const lesson: TimetableLesson = {
+          content: { lesson_from_reference: BUT_INFO_REF[type as keyof typeof BUT_INFO_REF], room, teacher, type },
+          end_date, group: {
+            main: group.main
+          },
+
+          start_date,
+
+          type: LESSON_TYPES.TD
+        };
+
+        lessons.push(lesson);
+        break;
+      }
+
+      case COLORS.TP: {
+        const [type, teacher, room] = texts[0].split(" - ");
+
+        const lesson: TimetableLesson = {
+          content: { lesson_from_reference: BUT_INFO_REF[type as keyof typeof BUT_INFO_REF], room, teacher, type },
+          end_date, group: {
+            main: group.main,
+            sub: group.sub
+          },
+
+          start_date,
+
+          type: LESSON_TYPES.TP
+        };
 
         lessons.push(lesson);
         break;

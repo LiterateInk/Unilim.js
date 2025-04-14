@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: Pawnilim
+title: Unilim
 message: >-
   If you use this software, please cite it using the
   metadata from this file.
@@ -8,9 +8,9 @@ authors:
   - name: LiterateInk
     website: "https://literate.ink"
     email: contact@literate.ink
-repository-code: 'https://github.com/LiterateInk/Pawnilim'
-url: 'https://docs.literate.ink/pawnilim'
-repository-artifact: 'https://www.npmjs.com/package/pawnilim'
+repository-code: "https://github.com/LiterateInk/Unilim.JS"
+url: "https://unilim.docs.literate.ink/"
+repository-artifact: "https://www.npmjs.com/package/unilim"
 abstract: >-
   A purrfect API wrapper for Unilim.
 keywords:

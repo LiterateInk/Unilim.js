@@ -1,7 +1,7 @@
-export { LESSON_TYPES, SUBGROUPS } from "./parser/constants";
-export { getTimetableFromBuffer, type Timetable } from "./parser";
-export type { TimetableLesson, TimetableLessonCM, TimetableLessonTD, TimetableLessonTP, TimetableLessonDS, TimetableLessonSAE, TimetableLessonOTHER } from "./parser/lessons";
-
+export { getLatestTimetableEntry, getTimetableEntries } from "./downloader";
 export { YEARS } from "./downloader/constants";
 export { TimetableEntry } from "./downloader/entry";
-export { getTimetableEntries, getLatestTimetableEntry } from "./downloader";
+
+export { getTimetableFromBuffer, type Timetable } from "./parser";
+export { LESSON_TYPES, SUBGROUPS } from "./parser/constants";
+export type { TimetableLesson, TimetableLessonCM, TimetableLessonDS, TimetableLessonOTHER, TimetableLessonSAE, TimetableLessonTD, TimetableLessonTP } from "./parser/lessons";

@@ -1,4 +1,4 @@
-import { cas_login, login_check, cas_oauth2_authorize, cas_oauth2_token, preferences_by_properties } from "../src";
+import { cas_login, cas_oauth2_authorize, cas_oauth2_token, login_check, preferences_by_properties } from "../src";
 import { credentials } from "./_credentials";
 
 void async function main () {

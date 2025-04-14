@@ -4,14 +4,15 @@
 export const BUT_INFO_REF = {
   "EE1A": "Questionnaire",
 
-  // Semestre 1, commun.
-  "S1.01": "Implémentation d'un besoin client",
-  "S1.02": "Comparaison d'approches algorithmiques",
-  "S1.03": "Installation d'un poste pour le développement",
-  "S1.04": "Création d'une base de données",
-  "S1.05": "Recueil de besoins",
-  "S1.06": "Environnement économique",
+  "P1.01": "Portfolio",
+  "P2.01": "Portfolio",
+  "P3.01": "Portfolio",
+  "P4.01": "Portfolio",
+  "P5.01": "Portfolio",
+  "P5.01A": "Portfolio",
 
+  "P5A.01": "Portfolio",
+  "P6.01": "Portfolio",
   "R1.01": "Initiation au développement",
   "R1.02": "Développement d'interfaces web",
   "R1.03": "Architecture des ordinateurs",
@@ -23,24 +24,16 @@ export const BUT_INFO_REF = {
   "R1.08B": "Introduction à la gestion des Organisations",
   "R1.09": "Économie durable et numérique",
   "R1.10": "Anglais",
+
   "R1.11": "Communication",
+
   "R1.12": "Projet professionnel et personnel",
-
-  "P1.01": "Portfolio",
-
-  // Semestre 2, commun.
-  "S2.01": "Développement d'une application",
-  "S2.02": "Exploration algorithmique d'un problème",
-  "S2.03": "Installation de services réseau",
-  "S2.04": "Exploitation d'une base de données",
-  "S2.05": "Gestion d'un projet",
-  "S2.06": "Organisation d'un travail d'équipe",
-
   "R2.01": "Développement orienté objets",
   "R2.02": "Développement d'applications avec IHM",
   "R2.02B": "Développement JavaScript",
   "R2.03": "Qualité de développement",
   "R2.04": "Communication et fonctionnement bas niveau",
+
   "R2.04B": "Réseaux",
   "R2.05": "Introduction aux services réseaux",
   "R2.06": "Exploitation d'une base de données",
@@ -54,23 +47,18 @@ export const BUT_INFO_REF = {
   "R2.12": "Anglais",
   "R2.13": "Communication technique",
   "R2.14": "Projet professionnel et personnel",
-
-  "P2.01": "Portfolio",
-
-  // Semestre 3, parcours A - we only have parcours A in this IUT.
-  "S3.St": "Stage",
-  "S3.01A": "Développement logiciel",
-  "S3.01B": "Réseaux",
-
   "R3.01": "Développement web",
   "R3.01A": "Développement web / JavaScript",
   "R3.01B": "Développement web / PHP",
   "R3.02": "Développement efficace",
   "R3.03": "Analyse",
+
   "R3.04": "Qualité de développement",
+
   "R3.05": "Programmation système",
   "R3.06": "Architecture des réseaux",
   "R3.07": "SQL et programmation",
+
   "R3.08": "Probabilités",
   "R3.09": "Cryptographie et sécurité",
   "R3.10": "Systèmes d'information",
@@ -79,13 +67,6 @@ export const BUT_INFO_REF = {
   "R3.12": "Anglais",
   "R3.13": "Communication professionnelle",
   "R3.14": "Projet personnel et professionnel",
-
-  "P3.01": "Portfolio",
-
-  // Semestre 4, parcours A.
-  "S4.St": "Stage",
-  "S4A.01": "Développement d'une application complexe",
-
   "R4.01": "Architecture logicielle",
   "R4.02": "Qualité de développement",
   "R4.03": "Qualité et au-delà du relationnel",
@@ -96,22 +77,17 @@ export const BUT_INFO_REF = {
   // .Real.
   "R4A.08": "Virtualisation",
   "R4A.09": "Systèmes d'information",
+
   "R4A.10": "Complément web",
+
   "R4A.11": "Développement pour applications mobiles",
   "R4A.12": "Automates et Langages",
-
-  "P4.01": "Portfolio",
-
-  // Semestre 5, parcours A.
-  "S5A.01": "Développement avancé",
-  // Same as S5A.01, somehow the IUT has two different codes for the same SAE.
-  "S5A.02": "Développement avancé",
 
   "R5.01": "Management d'une équipe de projet informatique",
   "R5.02": "Projet personnel et professionnel",
   "R5.02A": "Projet personnel et professionnel",
-  "R5A.02": "Projet personnel et professionnel",
   "R5.03": "Politique de communication",
+  "R5A.02": "Projet personnel et professionnel",
   // .Real.
   "R5A.04": "Qualité algorithmique",
   "R5A.05": "Programmation avancée",
@@ -120,18 +96,13 @@ export const BUT_INFO_REF = {
   "R5A.08": "Qualité de développement",
   "R5A.09": "Virtualisation avancée",
   "R5A.10": "Nouveaux paradigmes de base de données",
+
   "R5A.11": "Méthodes d'optimisation pour l'aide à la décision",
+
   "R5A.12": "Modélisations mathématiques",
   "R5A.13": "Économie durable et numérique",
+
   "R5A.14": "Anglais",
-
-  "P5A.01": "Portfolio",
-  "P5.01A": "Portfolio",
-  "P5.01": "Portfolio",
-
-  // Semestre 6, parcours A.
-  "S6A.01": "Évolution d'une application existante",
-
   "R6.01": "Initiation à l'entrepreneuriat",
   "R6.02": "Droit du numérique et de la propriété intellectuelle",
   "R6.03": "Communication : organisation et diffusion de l'information",
@@ -139,6 +110,35 @@ export const BUT_INFO_REF = {
   // .Real.
   "R6A.05": "Développement avancé",
   "R6A.06": "Maintenance applicative",
+  // Semestre 1, commun.
+  "S1.01": "Implémentation d'un besoin client",
+  "S1.02": "Comparaison d'approches algorithmiques",
+  "S1.03": "Installation d'un poste pour le développement",
+  "S1.04": "Création d'une base de données",
+  "S1.05": "Recueil de besoins",
+  "S1.06": "Environnement économique",
+  // Semestre 2, commun.
+  "S2.01": "Développement d'une application",
+  "S2.02": "Exploration algorithmique d'un problème",
+  "S2.03": "Installation de services réseau",
 
-  "P6.01": "Portfolio"
+  "S2.04": "Exploitation d'une base de données",
+  "S2.05": "Gestion d'un projet",
+  "S2.06": "Organisation d'un travail d'équipe",
+
+  "S3.01A": "Développement logiciel",
+
+  "S3.01B": "Réseaux",
+  // Semestre 3, parcours A - we only have parcours A in this IUT.
+  "S3.St": "Stage",
+  // Semestre 4, parcours A.
+  "S4.St": "Stage",
+  "S4A.01": "Développement d'une application complexe",
+  // Semestre 5, parcours A.
+  "S5A.01": "Développement avancé",
+  // Same as S5A.01, somehow the IUT has two different codes for the same SAE.
+  "S5A.02": "Développement avancé",
+
+  // Semestre 6, parcours A.
+  "S6A.01": "Évolution d'une application existante"
 };

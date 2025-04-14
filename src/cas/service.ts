@@ -1,5 +1,5 @@
 import { defaultFetcher, type Fetcher, getHeaderFromResponse } from "@literate.ink/utilities";
-import { HOST, EXTERNAL_SERVICES } from "~cas/constants";
+import { EXTERNAL_SERVICES, HOST } from "~cas/constants";
 
 /**
  * @param cookie can be retrieved using `login` function.
@@ -12,9 +12,9 @@ export const service = async (cookie: string, service: typeof EXTERNAL_SERVICES[
   url.searchParams.set("gateway", "true");
 
   const response = await fetcher({
-    url,
     headers: { Cookie: `lemonldap=${cookie}` },
-    redirect: "manual"
+    redirect: "manual",
+    url
   });
 
   const redirection = getHeaderFromResponse(response, "location");

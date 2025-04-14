@@ -8,6 +8,6 @@ if (!process.env.BIOME_USERNAME || !process.env.BIOME_PASSWORD) {
 }
 
 export const credentials = {
-  username: process.env.BIOME_USERNAME,
-  password: process.env.BIOME_PASSWORD
+  password: process.env.BIOME_PASSWORD,
+  username: process.env.BIOME_USERNAME
 };

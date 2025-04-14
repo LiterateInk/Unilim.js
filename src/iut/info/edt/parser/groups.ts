@@ -1,10 +1,16 @@
 import type { Page } from "@literate.ink/pdf-inspector";
 
+import { round } from "../utils/numbers";
 import { type FillBounds, getFillBounds, getTextsInFillBounds } from "./bounds";
 import { COLORS, DAYS, SUBGROUPS } from "./constants";
-import { round } from "../utils/numbers";
 
 export interface TimetableGroup {
+  /**
+   * Index of the day in the week, starting from `0`
+   * for **Monday** to `5` for **Saturday**.
+   */
+  day_index: typeof DAYS[keyof typeof DAYS];
+
   /**
    * Main group value.
    * For example, if you're in G1A, the main group value is `1`.
@@ -16,12 +22,6 @@ export interface TimetableGroup {
    * For example, if you're in G1A, the subgroup value is `0`.
    */
   sub: SUBGROUPS;
-
-  /**
-   * Index of the day in the week, starting from `0`
-   * for **Monday** to `5` for **Saturday**.
-   */
-  day_index: typeof DAYS[keyof typeof DAYS];
 }
 
 export const getTimetableGroups = (page: Page, header_bounds: FillBounds): Record<string, TimetableGroup> => {
@@ -61,8 +61,8 @@ export const getTimetableGroups = (page: Page, header_bounds: FillBounds): Recor
       const startYForGroupB = round(fill.y + (fill.h / 2), 4).toString();
 
       const group: Omit<TimetableGroup, "sub"> = {
-        main: main_group_name,
-        day_index
+        day_index,
+        main: main_group_name
       };
 
       groupsFromY[startYForGroupA] = {

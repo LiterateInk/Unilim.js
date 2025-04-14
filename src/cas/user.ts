@@ -1,5 +1,6 @@
-import { defaultFetcher, type Fetcher } from "@literate.ink/utilities";
 import type { Tokens, User } from "~cas/models";
+
+import { defaultFetcher, type Fetcher } from "@literate.ink/utilities";
 import { HOST } from "~cas/constants";
 
 /**
@@ -8,8 +9,8 @@ import { HOST } from "~cas/constants";
  */
 export const user = async (tokens: Tokens, fetcher: Fetcher = defaultFetcher): Promise<User> => {
   const response = await fetcher({
-    url: new URL(HOST + "/oauth2/userinfo"),
-    headers: { Authorization: `Bearer ${tokens.access_token}` }
+    headers: { Authorization: `Bearer ${tokens.access_token}` },
+    url: new URL(HOST + "/oauth2/userinfo")
   });
 
   if (response.status !== 200)

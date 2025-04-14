@@ -1,6 +1,7 @@
-import { credentials } from "../../_credentials";
 import * as cas from "~/cas";
 import * as signatures from "~/iut/signatures";
+
+import { credentials } from "../../_credentials";
 
 void async function main () {
   const state = await signatures.createAuthorizeClientState();

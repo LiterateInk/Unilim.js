@@ -1,5 +1,5 @@
+import { defaultFetcher, type Fetcher, findValueBetween, getCookiesFromResponse } from "@literate.ink/utilities";
 import { HOST } from "~cas/constants";
-import { type Fetcher, defaultFetcher, findValueBetween, getCookiesFromResponse } from "@literate.ink/utilities";
 
 const retrieveLoginToken = async (fetcher: Fetcher, retries = 0): Promise<string> => {
   const response = await fetcher({
@@ -30,20 +30,20 @@ export const login = async (username: string, password: string, fetcher: Fetcher
 
   // send the login request.
   const response = await fetcher({
-    url: new URL(HOST),
-    method: "POST",
+    content: new URLSearchParams({
+      password,
+      token,
+      url: "aHR0cHM6Ly9jYXMudW5pbGltLmZyL2Nhcw==", // -> btoa("https://cas.unilim.fr/cas")
+      user: username
+    }).toString(),
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
-    content: new URLSearchParams({
-      url: "aHR0cHM6Ly9jYXMudW5pbGltLmZyL2Nhcw==", // -> btoa("https://cas.unilim.fr/cas")
-      token,
-      user: username,
-      password
-    }).toString(),
+    method: "POST",
     // prevent redirections to any random page
     // since we need to read the "set-cookie" from THIS response.
-    redirect: "manual"
+    redirect: "manual",
+    url: new URL(HOST)
   });
 
   // read the "lemonldap" cookie from the response.

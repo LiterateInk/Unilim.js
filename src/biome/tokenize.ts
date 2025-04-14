@@ -6,16 +6,16 @@ import { API_ENDPOINT } from "~biome/constants";
  */
 export const tokenize = async (tokenCAS: string, fetcher: Fetcher = defaultFetcher): Promise<string> => {
   const response = await fetcher({
-    url: new URL(`${API_ENDPOINT}/api/login_check`),
     headers: { "X-Auth-Token": tokenCAS },
-    method: "POST"
+    method: "POST",
+    url: new URL(`${API_ENDPOINT}/api/login_check`)
   });
 
   const json = JSON.parse(response.content) as (
     // success
-    | { token: string }
-    // error, probably unauthorized
     | { code: number, message: string }
+    // error, probably unauthorized
+    | { token: string }
   );
 
   if ("code" in json) {

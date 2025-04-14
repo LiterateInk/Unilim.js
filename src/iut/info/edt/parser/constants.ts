@@ -4,13 +4,13 @@
  */
 export const COLORS = {
   CM: "#ffff0c",
-  TD: "#ffbab3",
-  TP: "#b3ffff",
   DS: "#f23ea7",
+  HEADER: "#64ccff",
+  RULERS: "#ffffa7",
   SAE: "#9fff9f",
 
-  RULERS: "#ffffa7",
-  HEADER: "#64ccff"
+  TD: "#ffbab3",
+  TP: "#b3ffff"
 };
 
 /**
@@ -21,13 +21,22 @@ export const COLORS = {
  * Should be used with a **+1** offset in `luxon.DateTime` since 0 means Sunday for them.
  */
 export const DAYS = {
+  JEUDI: 3,
   LUNDI: 0,
   MARDI: 1,
   MERCREDI: 2,
-  JEUDI: 3,
-  VENDREDI: 4,
-  SAMEDI: 5
+  SAMEDI: 5,
+  VENDREDI: 4
 };
+
+export enum LESSON_TYPES {
+  CM = "CM",
+  DS = "DS",
+  OTHER = "OTHER",
+  SAE = "SAE",
+  TD = "TD",
+  TP = "TP"
+}
 
 /**
  * To differentiate between the two subgroups.
@@ -35,13 +44,4 @@ export const DAYS = {
 export enum SUBGROUPS {
   A = 0,
   B = 1
-}
-
-export enum LESSON_TYPES {
-  CM = "CM",
-  TD = "TD",
-  TP = "TP",
-  DS = "DS",
-  SAE = "SAE",
-  OTHER = "OTHER"
 }

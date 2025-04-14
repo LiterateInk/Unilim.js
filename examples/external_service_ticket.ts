@@ -1,5 +1,5 @@
+import { CAS_EXTERNAL_SERVICES, cas_login, cas_service } from "../src";
 import { credentials } from "./_credentials";
-import { cas_login, cas_service, CAS_EXTERNAL_SERVICES } from "../src";
 
 /**
  * In this example, we'll see how we can get a ticket for an external service.

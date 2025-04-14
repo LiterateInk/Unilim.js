@@ -1,4 +1,4 @@
-import { cas_login, get_events_by_calendar_id, login_check, cas_oauth2_authorize, cas_oauth2_token } from "../src";
+import { cas_login, cas_oauth2_authorize, cas_oauth2_token, get_events_by_calendar_id, login_check } from "../src";
 import { credentials } from "./_credentials";
 
 const CALENDAR_ID = "";
@@ -11,8 +11,8 @@ void async function main () {
 
   const events = await get_events_by_calendar_id(token, {
     calendar_id: CALENDAR_ID,
-    dstart: new Date("2024-05-27"),
-    dend: new Date("2024-06-30")
+    dend: new Date("2024-06-30"),
+    dstart: new Date("2024-05-27")
   });
 
   console.log(events);
