@@ -6,10 +6,10 @@
 
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"],
       "~cas/*": ["./src/cas/*"],
       "~iut/*": ["./src/iut/*"],
       "~biome/*": ["./src/biome/*"],
+      "unilim": ["./src/index.ts"]
     },
 
     "strict": true,

@@ -1,10 +1,9 @@
-import * as cas from "~/cas";
-import * as signatures from "~/iut/signatures";
+import { iut, cas } from "unilim";
 
 import { credentials } from "../../_credentials";
 
 void async function main () {
-  const state = await signatures.createAuthorizeClientState();
+  const state = await iut.signatures.createAuthorizeClientState();
 
   // we authenticate to the CAS.
   const cookie = await cas.login(credentials.username, credentials.password);

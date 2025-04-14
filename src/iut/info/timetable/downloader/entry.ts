@@ -1,6 +1,6 @@
-import { EDT_ENDPOINT_URL, YEARS } from "~iut/info/edt/downloader/constants";
-import { getTimetableFromBuffer } from "~iut/info/edt/parser";
-import { DATE_TIME_OPTIONS } from "~iut/info/edt/utils/date";
+import { TIMETABLE_ENDPOINT_URL, YEARS } from "~iut/info/timetable/downloader/constants";
+import { getTimetableFromBuffer } from "~iut/info/timetable/parser";
+import { DATE_TIME_OPTIONS } from "~iut/info/timetable/utils/date";
 import { DateTime } from "luxon";
 
 export class TimetableEntry {
@@ -26,7 +26,7 @@ export class TimetableEntry {
     this.last_updated = DateTime.fromFormat(raw_date, "yyyy-MM-dd HH:mm", DATE_TIME_OPTIONS);
     this.week_number = parseInt(file_name.replace(/(A(.*)_S)|(.pdf)/g, ""));
     this.from_year = ("A" + file_name[1]) as YEARS;
-    this.link = `${EDT_ENDPOINT_URL}/${this.from_year}/${this.file_name}`;
+    this.link = `${TIMETABLE_ENDPOINT_URL}/${this.from_year}/${this.file_name}`;
   }
 
   /**

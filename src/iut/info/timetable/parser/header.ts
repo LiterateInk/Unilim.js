@@ -1,8 +1,8 @@
 import type { Page } from "@literate.ink/pdf-inspector";
 
-import { type FillBounds, getFillBounds, getTextsInFillBounds } from "~iut/info/edt/parser/bounds";
-import { COLORS } from "~iut/info/edt/parser/constants";
-import { DATE_TIME_OPTIONS } from "~iut/info/edt/utils/date";
+import { type FillBounds, getFillBounds, getTextsInFillBounds } from "~iut/info/timetable/parser/bounds";
+import { COLORS } from "~iut/info/timetable/parser/constants";
+import { DATE_TIME_OPTIONS } from "~iut/info/timetable/utils/date";
 import { DateTime } from "luxon";
 
 export interface TimetableHeader {

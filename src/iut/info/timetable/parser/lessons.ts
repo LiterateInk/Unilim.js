@@ -1,12 +1,12 @@
 import type { Page } from "@literate.ink/pdf-inspector";
-import type { TimetableGroup } from "~iut/info/edt/parser/groups";
-import type { TimetableHeader } from "~iut/info/edt/parser/header";
+import type { TimetableGroup } from "~iut/info/timetable/parser/groups";
+import type { TimetableHeader } from "~iut/info/timetable/parser/header";
 import type { DateTime, WeekdayNumbers } from "luxon";
 
-import { getFillBounds, getTextsInFillBounds } from "~iut/info/edt/parser/bounds";
-import { COLORS, LESSON_TYPES, SUBGROUPS } from "~iut/info/edt/parser/constants";
-import { round } from "~iut/info/edt/utils/numbers";
-import { BUT_INFO_REF } from "~iut/info/edt/utils/references";
+import { getFillBounds, getTextsInFillBounds } from "~iut/info/timetable/parser/bounds";
+import { COLORS, LESSON_TYPES, SUBGROUPS } from "~iut/info/timetable/parser/constants";
+import { round } from "~iut/info/timetable/utils/numbers";
+import { BUT_INFO_REF } from "~iut/info/timetable/utils/references";
 
 export type TimetableLesson = {
   end_date: DateTime;

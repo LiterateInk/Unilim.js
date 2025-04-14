@@ -1,12 +1,12 @@
-import { EDT_ENDPOINT_URL, YEARS } from "~iut/info/edt/downloader/constants";
-import { TimetableEntry } from "~iut/info/edt/downloader/entry";
+import { TIMETABLE_ENDPOINT_URL, YEARS } from "~iut/info/timetable/downloader/constants";
+import { TimetableEntry } from "~iut/info/timetable/downloader/entry";
 
 export const getTimetableEntries = async (from: YEARS): Promise<TimetableEntry[]> => {
   if (!Object.values(YEARS).includes(from)) {
     throw new Error(`"from" parameter is invalid, given year: '${from}'. Should be one of: ${Object.values(YEARS).join(", ")}`);
   }
 
-  const response = await fetch(`${EDT_ENDPOINT_URL}/${from}`);
+  const response = await fetch(`${TIMETABLE_ENDPOINT_URL}/${from}`);
   const html = await response.text();
 
   const regex = /<td><a href="(.*)">(.*)<\/a><\/td><td align="right">(.*)\s<\/td>/g;
