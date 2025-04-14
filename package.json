@@ -6,6 +6,8 @@
     "type": "git",
     "url": "git+https://github.com/LiterateInk/Unilim.JS.git"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "devDependencies": {
     "@stylistic/eslint-plugin": "^4.2.0",
     "@types/bun": "^1.2.9",
@@ -21,25 +23,13 @@
     "typescript": "^5.8.3"
   },
   "exports": {
-    "./biome": {
-      "types": "./dist/biome/index.d.ts",
-      "import": "./dist/biome/index.mjs",
-      "default": "./dist/biome/index.js"
+    "import": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
     },
-    "./cas": {
-      "types": "./dist/cas/index.d.ts",
-      "import": "./dist/cas/index.mjs",
-      "default": "./dist/cas/index.js"
-    },
-    "./iut/signatures": {
-      "types": "./dist/iut/signatures/index.d.ts",
-      "import": "./dist/iut/signatures/index.mjs",
-      "default": "./dist/iut/signatures/index.js"
-    },
-    "./iut/info/edt": {
-      "types": "./dist/iut/info/edt/index.d.ts",
-      "import": "./dist/iut/info/edt/index.mjs",
-      "default": "./dist/iut/info/edt/index.js"
+    "require": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     }
   },
   "bugs": {

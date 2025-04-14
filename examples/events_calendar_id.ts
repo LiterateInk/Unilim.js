@@ -1,4 +1,4 @@
-import { cas_login, cas_oauth2_authorize, cas_oauth2_token, get_events_by_calendar_id, login_check } from "../src";
+import { cas_login, cas_oauth2_authorize, cas_oauth2_token, get_events_by_calendar_id, login_check } from "../src/cas";
 import { credentials } from "./_credentials";
 
 const CALENDAR_ID = "";
