@@ -1,6 +1,10 @@
-<img alt="Pawnilim: A purrfect API wrapper for Unilim" src="https://raw.githubusercontent.com/LiterateInk/Pawnilim/index/.github/assets/banner.svg" width="100%" />
+<img alt="Unilim: A purrfect API wrapper for Unilim" src="https://raw.githubusercontent.com/LiterateInk/Unilim.JS/main/.github/assets/banner.svg" width="100%" />
 
 *This library **is not** affiliated with [Unilim](https://unilim.fr/) in any way.*
+
+## What is "Unilim" ?
+
+Unilim is a French university located in Limoges, France. It offers a wide range of courses in various fields. You can find more information about it on their [official website](https://unilim.fr/).
 
 ## Installation
 
