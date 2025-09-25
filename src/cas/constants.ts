@@ -1,11 +1,19 @@
 import type { ExternalClient } from "~cas/models";
 
-export const HOST = "https://cas.unilim.fr";
+// When internal server expires, we'll have to rollback to
+// export const HOST = "https://cas.unilim.fr";
+//
+// This is a workaround to bypass MFA: it hosts a `cloudflared` instance
+// in the internal servers of Unilim, thanks to `hosting.unilim.fr`
+// and exposes it to the following subdomain, managed by @Vexcited
+export const HOST = "https://cu-proxy.vexcited.com";
 
 export const EXTERNAL_SERVICES = {
-  COMMUNITIES_MOODLE: "https://communities.unilim.fr/login/index.php?authCAS=CAS",
+  COMMUNITIES_MOODLE:
+    "https://communities.unilim.fr/login/index.php?authCAS=CAS",
   GRADING: "https://inscription.unilim.fr/gestion/etudiant/rvn/",
-  IUT_COMMUNITY_MOODLE: "https://community-iut.unilim.fr/login/index.php?authCAS=CAS"
+  IUT_COMMUNITY_MOODLE:
+    "https://community-iut.unilim.fr/login/index.php?authCAS=CAS"
 } as const;
 
 export const EXTERNAL_CLIENTS = {
@@ -21,4 +29,3 @@ export const EXTERNAL_CLIENTS = {
     scopes: ["openid", "profile"]
   } satisfies ExternalClient
 } as const;
-

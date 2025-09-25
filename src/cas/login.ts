@@ -1,13 +1,25 @@
-import { defaultFetcher, type Fetcher, findValueBetween, getCookiesFromResponse } from "@literate.ink/utilities";
+import {
+  defaultFetcher,
+  type Fetcher,
+  findValueBetween,
+  getCookiesFromResponse
+} from "@literate.ink/utilities";
 import { HOST } from "~cas/constants";
 
-const retrieveLoginToken = async (fetcher: Fetcher, retries = 0): Promise<string> => {
+const retrieveLoginToken = async (
+  fetcher: Fetcher,
+  retries = 0
+): Promise<string> => {
   const response = await fetcher({
     url: new URL(HOST)
   });
 
   // find the token that allows to send the login request.
-  const token = findValueBetween(response.content, "name=\"token\" value=\"", "\" />");
+  const token = findValueBetween(
+    response.content,
+    "name=\"token\" value=\"",
+    "\" />"
+  );
 
   if (!token) {
     // we retry 5 times before throwing the actual error.
@@ -25,7 +37,11 @@ const retrieveLoginToken = async (fetcher: Fetcher, retries = 0): Promise<string
  * authenticates to `https://cas.unilim.fr` using the given `username` and `password`.
  * @returns the `lemonldap` cookie that is a token for further authenticated requests.
  */
-export const login = async (username: string, password: string, fetcher: Fetcher = defaultFetcher): Promise<string> => {
+export const login = async (
+  username: string,
+  password: string,
+  fetcher: Fetcher = defaultFetcher
+): Promise<string> => {
   const token = await retrieveLoginToken(fetcher);
 
   // send the login request.
@@ -50,8 +66,7 @@ export const login = async (username: string, password: string, fetcher: Fetcher
   const cookies = getCookiesFromResponse(response);
   const lemonCookie = cookies[0].split("=")[1];
 
-  if (!lemonCookie)
-    throw new Error("bad authentication");
+  if (!lemonCookie) throw new Error("bad authentication");
 
   return lemonCookie;
 };
