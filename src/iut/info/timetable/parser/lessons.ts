@@ -1,12 +1,13 @@
 import type { Page } from "@literate.ink/pdf-inspector";
-import type { TimetableGroup } from "~iut/info/timetable/parser/groups";
-import type { TimetableHeader } from "~iut/info/timetable/parser/header";
 import type { DateTime, WeekdayNumbers } from "luxon";
+import type { SUBGROUPS } from "./constants";
+import type { TimetableGroup } from "./groups";
 
-import { getFillBounds, getTextsInFillBounds } from "~iut/info/timetable/parser/bounds";
-import { COLORS, LESSON_TYPES, SUBGROUPS } from "~iut/info/timetable/parser/constants";
-import { round } from "~iut/info/timetable/utils/numbers";
-import { BUT_INFO_REF } from "~iut/info/timetable/utils/references";
+import type { TimetableHeader } from "./header";
+import { round } from "../utils/numbers";
+import { BUT_INFO_REF } from "../utils/references";
+import { getFillBounds, getTextsInFillBounds } from "./bounds";
+import { COLORS, LESSON_TYPES } from "./constants";
 
 export type TimetableLesson = {
   end_date: DateTime;
@@ -27,22 +28,22 @@ export interface TimetableLessonCM {
     room: string;
     teacher: string;
     type: string;
-  }
+  };
 
   type: LESSON_TYPES.CM;
 }
 
 export interface TimetableLessonDS {
   content: {
-    lesson_from_reference?: string
+    lesson_from_reference?: string;
     room: string;
     teacher: string;
     type: string;
-  }
+  };
 
   group: {
     main: number;
-  }
+  };
 
   type: LESSON_TYPES.DS;
 }
@@ -52,7 +53,7 @@ export interface TimetableLessonOTHER {
     description: string;
     room: string;
     teacher: string;
-  }
+  };
 
   type: LESSON_TYPES.OTHER;
 }
@@ -64,45 +65,45 @@ export interface TimetableLessonSAE {
     room: string;
     teacher: string;
     type: string;
-  }
+  };
 
   /** When `undefined`, it means that it's for every groups. */
-  group: {
+  group: undefined | {
     main: number;
     /** When `undefined`, it means that it's for the whole group. */
     sub?: SUBGROUPS;
-  } | undefined
+  };
 
   type: LESSON_TYPES.SAE;
 }
 
 export interface TimetableLessonTD {
   content: {
-    lesson_from_reference?: string
+    lesson_from_reference?: string;
     room: string;
     teacher: string;
     type: string;
-  }
+  };
 
   group: {
     main: number;
-  }
+  };
 
   type: LESSON_TYPES.TD;
 }
 
 export interface TimetableLessonTP {
   content: {
-    lesson_from_reference?: string
+    lesson_from_reference?: string;
     room: string;
     teacher: string;
     type: string;
-  }
+  };
 
   group: {
     main: number;
     sub: SUBGROUPS;
-  }
+  };
 
   type: LESSON_TYPES.TP;
 }
@@ -138,6 +139,7 @@ export const getTimetableLessons = (page: Page, header: TimetableHeader, timings
 
     switch (color) {
       case COLORS.CM: {
+        // eslint-disable-next-line prefer-const
         let [type, ...text_from_after_separator] = texts.shift()!.split(" -");
         // Remove duplicate types.
         type = [...new Set(type.split(" "))].join(" ");
@@ -194,7 +196,6 @@ export const getTimetableLessons = (page: Page, header: TimetableHeader, timings
           return rounded_start_y_number > (bounds.start_y + 2) && rounded_start_y_number < (bounds.end_y - 2);
         }).length;
 
-
         // It's an SAE for a single group,
         // but in some cases can also be an SAE for a subgroup.
         if (texts.length === 1) {
@@ -222,7 +223,7 @@ export const getTimetableLessons = (page: Page, header: TimetableHeader, timings
           };
         }
         else {
-          const room = texts.pop()?.trim();;
+          const room = texts.pop()?.trim(); ;
 
           let teacher = texts.pop()?.trim();
           // It can happen that for some reason, the room is duplicated.

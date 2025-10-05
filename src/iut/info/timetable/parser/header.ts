@@ -1,12 +1,12 @@
 import type { Page } from "@literate.ink/pdf-inspector";
 
-import { type FillBounds, getFillBounds, getTextsInFillBounds } from "~iut/info/timetable/parser/bounds";
-import { COLORS } from "~iut/info/timetable/parser/constants";
-import { DATE_TIME_OPTIONS } from "~iut/info/timetable/utils/date";
 import { DateTime } from "luxon";
+import { DATE_TIME_OPTIONS } from "../utils/date";
+import { type FillBounds, getFillBounds, getTextsInFillBounds } from "./bounds";
+import { COLORS } from "./constants";
 
 export interface TimetableHeader {
-  bounds: FillBounds
+  bounds: FillBounds;
 
   data: {
     end_date: DateTime;
@@ -14,7 +14,7 @@ export interface TimetableHeader {
 
     week_number: number;
     week_number_in_year: number;
-  },
+  };
 }
 
 // Format for the date in the header.

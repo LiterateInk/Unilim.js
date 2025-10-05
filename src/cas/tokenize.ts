@@ -1,7 +1,7 @@
-import type { ExternalClient, Tokens } from "~cas/models";
+import type { ExternalClient, Tokens } from "./models";
 
 import { defaultFetcher, type Fetcher } from "@literate.ink/utilities";
-import { HOST } from "~cas/constants";
+import { HOST } from "./constants";
 
 export const tokenize = async (callbackURL: URL, client: ExternalClient, fetcher: Fetcher = defaultFetcher): Promise<Tokens> => {
   const code = callbackURL.searchParams.get("code");

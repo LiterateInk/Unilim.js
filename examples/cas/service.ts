@@ -2,7 +2,7 @@ import { cas } from "unilim";
 
 import { credentials } from "../_credentials";
 
-void async function main () {
+void (async function main() {
   // 1. we authenticate to the CAS.
   const cookie = await cas.login(credentials.username, credentials.password);
 
@@ -10,4 +10,4 @@ void async function main () {
   const ticket = await cas.service(cookie, cas.EXTERNAL_SERVICES.COMMUNITIES_MOODLE);
 
   console.log(ticket);
-}();
+}());

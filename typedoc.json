@@ -1,0 +1,14 @@
+{
+  "name": "Unilim",
+  "hideGenerator": true,
+  "cleanOutputDir": true,
+  "customFooterHtml": "<a href=\"https://www.netlify.com\"><img src=\"https://www.netlify.com/assets/badges/netlify-badge-dark.svg\" alt=\"Deploys by Netlify\" /></a>",
+  "entryPoints": ["src/index.ts"],
+  "basePath": "src",
+  "plugin": ["typedoc-plugin-remove-3dots-default-value"],
+  "navigationLinks": {
+    "Website": "https://unilim.docs.literate.ink/",
+    "GitHub": "https://github.com/LiterateInk/Unilim.js",
+    "Discord": "https://literate.ink/discord"
+  }
+}

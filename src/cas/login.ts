@@ -4,7 +4,7 @@ import {
   findValueBetween,
   getCookiesFromResponse
 } from "@literate.ink/utilities";
-import { HOST } from "~cas/constants";
+import { HOST } from "./constants";
 
 const retrieveLoginToken = async (
   fetcher: Fetcher,

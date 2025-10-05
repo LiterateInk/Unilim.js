@@ -2,7 +2,7 @@ import { defaultFetcher, type Fetcher, getHeaderFromResponse } from "@literate.i
 
 import { HOST } from "./constants";
 
-export const createAuthorizeClientState = async (fetcher: Fetcher = defaultFetcher) => {
+export const createAuthorizeClientState = async (fetcher: Fetcher = defaultFetcher): Promise<string> => {
   const response = await fetcher({
     redirect: "manual",
     url: new URL(`${HOST}/login`)

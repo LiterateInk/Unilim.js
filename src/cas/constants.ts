@@ -1,4 +1,4 @@
-import type { ExternalClient } from "~cas/models";
+import type { ExternalClient } from "./models";
 
 // When internal server expires, we'll have to rollback to
 // export const HOST = "https://cas.unilim.fr";

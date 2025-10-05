@@ -1,9 +1,9 @@
 export type User = Readonly<{
-  email: string
-  family_name: string
-  given_name: string
+  email: string;
+  family_name: string;
+  given_name: string;
   /** Family name and given name combined. */
-  name: string
+  name: string;
   /** Username used to authenticate. */
-  sub: string
+  sub: string;
 }>;

@@ -1,5 +1,6 @@
+import type { EXTERNAL_SERVICES } from "./constants";
 import { defaultFetcher, type Fetcher, getHeaderFromResponse } from "@literate.ink/utilities";
-import { EXTERNAL_SERVICES, HOST } from "~cas/constants";
+import { HOST } from "./constants";
 
 /**
  * @param cookie can be retrieved using `login` function.

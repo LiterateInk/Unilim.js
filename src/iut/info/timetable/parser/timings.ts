@@ -1,7 +1,7 @@
 import type { Page } from "@literate.ink/pdf-inspector";
 
-import { type FillBounds, getFillBounds, getTextsInFillBounds } from "~iut/info/timetable/parser/bounds";
-import { COLORS } from "~iut/info/timetable/parser/constants";
+import { type FillBounds, getFillBounds, getTextsInFillBounds } from "./bounds";
+import { COLORS } from "./constants";
 
 export const getTimetableTimings = (page: Page, headerBounds: FillBounds): Record<string, string> => {
   // We get the fills for the timing that are just below the header.

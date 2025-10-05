@@ -1,7 +1,9 @@
-import { TIMETABLE_ENDPOINT_URL, YEARS } from "~iut/info/timetable/downloader/constants";
-import { getTimetableFromBuffer } from "~iut/info/timetable/parser";
-import { DATE_TIME_OPTIONS } from "~iut/info/timetable/utils/date";
+import type { Timetable } from "../parser";
+import type { YEARS } from "./constants";
 import { DateTime } from "luxon";
+import { getTimetableFromBuffer } from "../parser";
+import { DATE_TIME_OPTIONS } from "../utils/date";
+import { TIMETABLE_ENDPOINT_URL } from "./constants";
 
 export class TimetableEntry {
   /** Includes the `.pdf` extension. */
@@ -40,7 +42,7 @@ export class TimetableEntry {
   /**
    * @returns The timetable's content parsed.
    */
-  public async getTimetable() {
+  public async getTimetable(): Promise<Timetable> {
     const buffer = await this.getBuffer();
     const timetable = await getTimetableFromBuffer(buffer);
     return timetable;

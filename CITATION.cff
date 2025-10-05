@@ -8,7 +8,7 @@ authors:
   - name: LiterateInk
     website: "https://literate.ink"
     email: contact@literate.ink
-repository-code: "https://github.com/LiterateInk/Unilim.JS"
+repository-code: "https://github.com/LiterateInk/Unilim.js"
 url: "https://unilim.docs.literate.ink/"
 repository-artifact: "https://www.npmjs.com/package/unilim"
 abstract: >-

@@ -1,7 +1,7 @@
-import type { Tokens, User } from "~cas/models";
+import type { Tokens, User } from "./models";
 
 import { defaultFetcher, type Fetcher } from "@literate.ink/utilities";
-import { HOST } from "~cas/constants";
+import { HOST } from "./constants";
 
 /**
  * gets user information from the CAS

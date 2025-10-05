@@ -1,8 +1,9 @@
+import type { TimetableLesson } from "./lessons";
 import { type Page, parsePDF } from "@literate.ink/pdf-inspector";
-import { getTimetableGroups } from "~iut/info/timetable/parser/groups";
-import { getTimetableHeader, type TimetableHeader } from "~iut/info/timetable/parser/header";
-import { getTimetableLessons, TimetableLesson } from "~iut/info/timetable/parser/lessons";
-import { getTimetableTimings } from "~iut/info/timetable/parser/timings";
+import { getTimetableGroups } from "./groups";
+import { getTimetableHeader, type TimetableHeader } from "./header";
+import { getTimetableLessons } from "./lessons";
+import { getTimetableTimings } from "./timings";
 
 export interface Timetable {
   header: TimetableHeader["data"];

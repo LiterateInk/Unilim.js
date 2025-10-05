@@ -2,7 +2,7 @@ import { cas } from "unilim";
 
 import { credentials } from "../_credentials";
 
-void async function main () {
+void (async function main() {
   // 1. we authenticate to the CAS.
   const cookie = await cas.login(credentials.username, credentials.password);
 
@@ -13,4 +13,4 @@ void async function main () {
   // 3. we get the user information from the CAS (not from BIOME!)
   const user = await cas.user(token);
   console.log(`Hello, ${user.name} <${user.email}> !`);
-}();
+}());

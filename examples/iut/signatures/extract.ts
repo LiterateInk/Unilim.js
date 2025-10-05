@@ -2,7 +2,7 @@ import { cas, iut } from "unilim";
 
 import { credentials } from "../../_credentials";
 
-void async function main () {
+void (async function main() {
   const state = await iut.signatures.createAuthorizeClientState();
 
   // we authenticate to the CAS.
@@ -12,4 +12,4 @@ void async function main () {
   const callbackURL = await cas.authorize(cookie, cas.EXTERNAL_CLIENTS.IUT_SIGNATURES, state);
 
   // TODO
-}();
+}());

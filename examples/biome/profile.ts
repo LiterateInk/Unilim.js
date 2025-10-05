@@ -2,7 +2,7 @@ import { biome, cas } from "unilim";
 
 import { credentials } from "../_credentials";
 
-void async function main () {
+void (async function main() {
   // we authenticate to the CAS.
   const cookie = await cas.login(credentials.username, credentials.password);
 
@@ -20,4 +20,4 @@ void async function main () {
 
   // let's display the raw data, it's a lot of information!
   console.dir(profile, { depth: Infinity });
-}();
+}());

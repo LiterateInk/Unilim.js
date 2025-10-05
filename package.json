@@ -1,27 +1,26 @@
 {
   "name": "unilim",
   "version": "0.2.1",
+  "description": "A purrfect API wrapper for Unilim.",
   "author": "LiterateInk <contact@literate.ink> (https://literate.ink)",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://unilim.docs.literate.ink/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LiterateInk/Unilim.JS.git"
+    "url": "git+https://github.com/LiterateInk/Unilim.js.git"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "devDependencies": {
-    "@stylistic/eslint-plugin": "^4.2.0",
-    "@types/bun": "^1.2.9",
-    "@types/luxon": "^3.4.2",
-    "@types/node": "^20.14.2",
-    "@typescript-eslint/parser": "^8.29.1",
-    "dotenv": "^16.4.5",
-    "eslint": "^9.24.0",
-    "eslint-plugin-perfectionist": "^4.11.0",
-    "jiti": "^2.4.2",
-    "terser": "^5.39.0",
-    "tsup": "^8.4.0",
-    "typescript": "^5.8.3"
+  "bugs": {
+    "url": "https://github.com/LiterateInk/Unilim.js/issues"
   },
+  "keywords": [
+    "unilim",
+    "biome",
+    "api",
+    "wrapper",
+    "student",
+    "university"
+  ],
+  "sideEffects": false,
   "exports": {
     "import": {
       "types": "./dist/index.d.mts",
@@ -32,30 +31,31 @@
       "default": "./dist/index.js"
     }
   },
-  "bugs": {
-    "url": "https://github.com/LiterateInk/Unilim.JS/issues"
-  },
-  "description": "A purrfect API wrapper for Unilim.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "homepage": "https://unilim.docs.literate.ink/",
-  "keywords": [
-    "unilim",
-    "biome",
-    "api",
-    "wrapper",
-    "student",
-    "university"
-  ],
-  "license": "GPL-3.0-or-later",
   "scripts": {
-    "build": "tsup"
+    "build": "tsdown"
   },
-  "sideEffects": false,
   "dependencies": {
     "@literate.ink/pdf-inspector": "^1.0.0",
     "@literate.ink/utilities": "1.0.0-11713907881.1",
     "luxon": "^3.5.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.23",
+    "@types/luxon": "^3.4.2",
+    "@vexcited/eslint-config": "^0.1.1",
+    "dotenv": "^16.4.5",
+    "eslint": "^9.24.0",
+    "jiti": "^2.6.1",
+    "terser": "^5.44.0",
+    "tsdown": "^0.15.6",
+    "typedoc": "^0.28.13",
+    "typedoc-plugin-remove-3dots-default-value": "^0.1.0",
+    "typescript": "^5.9.3"
   }
 }

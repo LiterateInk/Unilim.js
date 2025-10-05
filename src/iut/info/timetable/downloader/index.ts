@@ -1,5 +1,5 @@
-import { TIMETABLE_ENDPOINT_URL, YEARS } from "~iut/info/timetable/downloader/constants";
-import { TimetableEntry } from "~iut/info/timetable/downloader/entry";
+import { TIMETABLE_ENDPOINT_URL, YEARS } from "./constants";
+import { TimetableEntry } from "./entry";
 
 export const getTimetableEntries = async (from: YEARS): Promise<TimetableEntry[]> => {
   if (!Object.values(YEARS).includes(from)) {

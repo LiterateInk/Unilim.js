@@ -1,5 +1,5 @@
 import { defaultFetcher, type Fetcher } from "@literate.ink/utilities";
-import { API_ENDPOINT } from "~biome/constants";
+import { API_ENDPOINT } from "./constants";
 
 /**
  * @returns a token to use for the Biome API
@@ -13,7 +13,7 @@ export const tokenize = async (tokenCAS: string, fetcher: Fetcher = defaultFetch
 
   const json = JSON.parse(response.content) as (
     // success
-    | { code: number, message: string }
+    | { code: number; message: string }
     // error, probably unauthorized
     | { token: string }
   );

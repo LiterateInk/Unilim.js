@@ -1,7 +1,7 @@
-import type { ExternalClient } from "~cas/models";
+import type { ExternalClient } from "./models";
 
 import { defaultFetcher, type Fetcher, getHeaderFromResponse } from "@literate.ink/utilities";
-import { HOST } from "~cas/constants";
+import { HOST } from "./constants";
 
 /**
  * Does all the steps to authorize a user

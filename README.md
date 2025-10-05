@@ -1,6 +1,6 @@
-<img alt="Unilim: A purrfect API wrapper for Unilim" src="https://raw.githubusercontent.com/LiterateInk/Unilim.JS/main/.github/assets/banner.svg" width="100%" />
+<img alt="Unilim: A purrfect API wrapper for Unilim" src="https://raw.githubusercontent.com/LiterateInk/Unilim.js/main/.github/assets/banner.svg" width="100%" />
 
-*This library **is not** affiliated with [&nearr;&nbsp;University of Limoges](https://unilim.fr/) in any way.*
+_This library **is not** affiliated with [&nearr;&nbsp;University of Limoges](https://unilim.fr/) in any way._
 
 ## What is "Unilim" ?
 
@@ -28,9 +28,9 @@ bun add unilim
 
 > TODO
 
-You can find guides at [**&nearr;&nbsp;unilim.docs.literate.ink**](https://unilim.docs.literate.ink) and if it's not enough you can also take a look at the [**&nearr;&nbsp;examples** directory on the GitHub repository](https://github.com/LiterateInk/Unilim.JS/tree/main/examples) for inspiration.
+You can find guides at [**&nearr;&nbsp;unilim.docs.literate.ink**](https://unilim.docs.literate.ink) and if it's not enough you can also take a look at the [**&nearr;&nbsp;examples** directory on the GitHub repository](https://github.com/LiterateInk/Unilim.js/tree/main/examples) for inspiration.
 
-If none of those are helpful, you can always [&nearr;&nbsp;open an issue](https://github.com/LiterateInk/Unilim.JS/issues) to ask for help or join the [&nearr;&nbsp;LiterateInk Discord server](https://literate.ink/discord).
+If none of those are helpful, you can always [&nearr;&nbsp;open an issue](https://github.com/LiterateInk/Unilim.js/issues) to ask for help or join the [&nearr;&nbsp;LiterateInk Discord server](https://literate.ink/discord).
 
 ## License
 

@@ -1,7 +1,7 @@
-import type { Profile } from "~biome/models";
+import type { Profile } from "./models";
 
 import { defaultFetcher, type Fetcher } from "@literate.ink/utilities";
-import { API_ENDPOINT } from "~biome/constants";
+import { API_ENDPOINT } from "./constants";
 
 export const profile = async (token: string, username: string, fetcher: Fetcher = defaultFetcher): Promise<Profile> => {
   const response = await fetcher({
