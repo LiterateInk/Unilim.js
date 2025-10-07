@@ -1,4 +1,4 @@
-export interface BiomeEvent {
+export interface Event {
   allDay: boolean;
 
   /** Same calendarID provided in request parameters. */

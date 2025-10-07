@@ -1,6 +1,4 @@
-import type { User } from "./models/User";
-import type { OAuth2, Tokens } from "./oauth2";
-import type { Services } from "./services";
+import type { OAuth2, Services, Tokens, User } from "./models";
 import { HeaderKeys, HttpRequest, HttpRequestMethod, HttpRequestRedirection, send } from "schwi";
 
 export class CAS {

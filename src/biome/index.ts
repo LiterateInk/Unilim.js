@@ -1,8 +1,8 @@
-import type { CAS } from "./cas";
-import type { BiomeProfile } from "./models/BiomeProfile";
+import type { CAS } from "../cas";
+import type { Profile } from "./models";
 import { base64nopad } from "@scure/base";
 import { HeaderKeys, HttpRequest, HttpRequestMethod, send } from "schwi";
-import { OAuth2 } from "./oauth2";
+import { OAuth2 } from "../cas/models";
 
 export class Biome {
   public static readonly oauth2 = new OAuth2("biome-prod", "https://biome.unilim.fr/authentication/callback", ["openid", "profile", "email"]);
@@ -59,7 +59,7 @@ export class Biome {
     return new Biome(json.token);
   }
 
-  public async profile(): Promise<BiomeProfile> {
+  public async profile(): Promise<Profile> {
     const request = new HttpRequest.Builder(Biome.HOST + "/api/profile/" + this.username)
       .setHeader(HeaderKeys.AUTHORIZATION, `Bearer ${this.token}`)
       .build();

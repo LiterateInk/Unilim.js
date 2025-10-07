@@ -1,4 +1,4 @@
-export interface BiomeProfile {
+export interface Profile {
   /**
    * base64 encoded image
    */
