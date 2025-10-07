@@ -5,3 +5,11 @@ export type Tokens = Readonly<{
   refresh_token: string;
   token_type: "Bearer";
 }>;
+
+export class OAuth2 {
+  public constructor(
+    public identifier: string,
+    public callback: string,
+    public scopes: Array<string>
+  ) {}
+}

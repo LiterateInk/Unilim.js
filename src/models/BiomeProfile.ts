@@ -1,4 +1,4 @@
-export type Profile = Readonly<{
+export interface BiomeProfile {
   /**
    * base64 encoded image
    */
@@ -19,9 +19,8 @@ export type Profile = Readonly<{
     mail: string;
     mobilePro: string;
     otherTel: string;
-    tel: string;
+    tel: null | string;
     unilimXivoSync: boolean;
-    /** Website URL */
     web: null | string;
   };
 
@@ -79,4 +78,4 @@ export type Profile = Readonly<{
   title: string;
   username: string;
   yearRegistration: number;
-}>;
+}

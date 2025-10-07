@@ -1,4 +1,4 @@
-export type Event = Readonly<{
+export interface BiomeEvent {
   allDay: boolean;
 
   /** Same calendarID provided in request parameters. */
@@ -36,4 +36,4 @@ export type Event = Readonly<{
   title: string;
 
   url: null | string;
-}>;
+};

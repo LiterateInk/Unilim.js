@@ -1,4 +1,4 @@
-export type User = Readonly<{
+export interface User {
   email: string;
   family_name: string;
   given_name: string;
@@ -6,4 +6,4 @@ export type User = Readonly<{
   name: string;
   /** Username used to authenticate. */
   sub: string;
-}>;
+}
