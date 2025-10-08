@@ -3,7 +3,12 @@
   "hideGenerator": true,
   "cleanOutputDir": true,
   "customFooterHtml": "<a href=\"https://www.netlify.com\"><img src=\"https://www.netlify.com/assets/badges/netlify-badge-dark.svg\" alt=\"Deploys by Netlify\" /></a>",
-  "entryPoints": ["src/index.ts"],
+  "entryPoints": [
+    "src/biome/index.ts",
+    "src/cas/index.ts",
+    "src/iut/cs/timetable/index.ts",
+    "src/iut/signatures/index.ts"
+  ],
   "basePath": "src",
   "plugin": ["typedoc-plugin-remove-3dots-default-value"],
   "navigationLinks": {
