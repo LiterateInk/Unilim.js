@@ -3,9 +3,9 @@ import type { Page } from "@literate.ink/pdf-inspector";
 import { type FillBounds, getFillBounds, getTextsInFillBounds } from "./bounds";
 import { COLORS } from "./constants";
 
-export const getTimetableTimings = (page: Page, headerBounds: FillBounds): Record<string, string> => {
+export const getTimetableTimings = (page: Page, header_bounds: FillBounds): Record<string, string> => {
   // We get the fills for the timing that are just below the header.
-  const timing_fills = page.Fills.filter((fill) => fill.oc === COLORS.RULERS && fill.y === headerBounds.end_y);
+  const timing_fills = page.Fills.filter((fill) => fill.oc === COLORS.RULERS && fill.y === header_bounds.end_y);
   const timingsFromX: Record<string, string> = {};
 
   for (const fill of timing_fills) {

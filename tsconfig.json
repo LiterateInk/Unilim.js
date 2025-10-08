@@ -8,9 +8,8 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "paths": {
-      "~/*": ["./src/*"],
-      "@!/*": ["./tests/*"],
-      "unilim": ["./src/index.ts"]
+      "~cas": ["./src/cas/index.ts"],
+      "@!/*": ["./tests/*"]
     },
 
     "strict": true,

@@ -1,12 +1,14 @@
 import type { OAuth2, Services, Tokens, User } from "./models";
 import { HeaderKeys, HttpRequest, HttpRequestMethod, HttpRequestRedirection, send } from "schwi";
 
+export * from "./models";
+
 export class CAS {
-  private static readonly COOKIE = "lemonldap";
+  public static readonly COOKIE = "lemonldap";
 
   // URL is a workaround to bypass MFA: it hosts a `cloudflared` instance
   // using the internal hosting services that proxies `cas.unilim.fr`.
-  private static readonly HOST = "https://cu-proxy.vexcited.com";
+  public static readonly HOST = "https://cu-proxy.vexcited.com";
 
   public constructor(
     /**
@@ -74,17 +76,21 @@ export class CAS {
    * Authorize an user through `/oauth2` route.
    * @returns callback URL with authentication details
    */
-  public async authorize(client: OAuth2, state = ""): Promise<URL> {
+  public async authorize(client: OAuth2, challenge = false, state = ""): Promise<URL> {
     const url = new URL(CAS.HOST + "/oauth2/authorize");
+    const scopes = client.scopes.join(" ");
 
     const parameters = url.searchParams;
     parameters.set("redirect_uri", client.callback);
     parameters.set("client_id", client.identifier);
     parameters.set("response_type", "code");
-    parameters.set("scope", client.scopes.join(" "));
-    parameters.set("code_challenge_method", "plain");
-    parameters.set("code_challenge", "literateink");
+    parameters.set("scope", scopes);
     parameters.set("state", state);
+
+    if (challenge) {
+      parameters.set("code_challenge_method", "plain");
+      parameters.set("code_challenge", "literateink");
+    }
 
     const request = new HttpRequest.Builder(url)
       .setRedirection(HttpRequestRedirection.MANUAL)
@@ -92,8 +98,44 @@ export class CAS {
       .build();
 
     const response = await send(request);
-    const location = response.headers.get("location");
-    if (!location) throw new Error("location header not found");
+
+    let location = response.headers.get("location");
+
+    // We're prompted to accept the OAuth2.0
+    if (response.status === 200 && !location) {
+      const $ = await response.toHTML();
+      const confirm = $("#confirm").attr("value");
+
+      if (confirm) {
+        const body = new URLSearchParams({
+          client_id: client.identifier,
+          confirm,
+          redirect_uri: client.callback,
+          response_type: "code",
+          scope: scopes,
+          // -> btoa("https://cas.unilim.fr/oauth2")
+          url: "aHR0cHM6Ly9jYXMudW5pbGltLmZyL29hdXRoMg=="
+        });
+
+        if (challenge) {
+          body.set("code_challenge", "literateink");
+          body.set("code_challenge_method", "plain");
+        }
+
+        const request = new HttpRequest.Builder(url)
+          .setMethod(HttpRequestMethod.POST)
+          .setRedirection(HttpRequestRedirection.MANUAL)
+          .setCookie(CAS.COOKIE, this.lemonldap)
+          .setFormUrlEncodedBody(body)
+          .build();
+
+        const response = await send(request);
+        location = response.headers.get("location");
+      }
+    }
+
+    if (!location)
+      throw new Error("location header not found");
 
     return new URL(location);
   }
@@ -130,7 +172,7 @@ export class CAS {
    * @param callback url created with {@link authorize} method
    * @param client oauth2 linked to the url
    */
-  public async tokenize(callback: URL, client: OAuth2): Promise<Tokens> {
+  public async tokenize(callback: URL, client: OAuth2, challenge = false): Promise<Tokens> {
     const code = callback.searchParams.get("code");
 
     if (!code)
@@ -139,10 +181,13 @@ export class CAS {
     const body = new URLSearchParams({
       client_id: client.identifier,
       code,
-      code_verifier: "literateink",
       grant_type: "authorization_code",
       redirect_uri: client.callback
     });
+
+    if (challenge) {
+      body.set("code_verifier", "literateink");
+    }
 
     const request = new HttpRequest.Builder(CAS.HOST + "/oauth2/token")
       .setFormUrlEncodedBody(body)

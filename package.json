@@ -12,6 +12,10 @@
   "bugs": {
     "url": "https://github.com/LiterateInk/Unilim.js/issues"
   },
+  "workspaces": [
+    ".",
+    "examples"
+  ],
   "keywords": [
     "unilim",
     "biome",
@@ -22,13 +26,45 @@
   ],
   "sideEffects": false,
   "exports": {
-    "import": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
+    "./cas": {
+      "import": {
+        "types": "./dist/cas/index.d.mts",
+        "default": "./dist/cas/index.mjs"
+      },
+      "require": {
+        "types": "./dist/cas/index.d.ts",
+        "default": "./dist/cas/index.js"
+      }
     },
-    "require": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+    "./biome": {
+      "import": {
+        "types": "./dist/biome/index.d.mts",
+        "default": "./dist/biome/index.mjs"
+      },
+      "require": {
+        "types": "./dist/biome/index.d.ts",
+        "default": "./dist/biome/index.js"
+      }
+    },
+    "./iut/cs/timetable": {
+      "import": {
+        "types": "./dist/iut/cs/timetable/index.d.mts",
+        "default": "./dist/iut/cs/timetable/index.mjs"
+      },
+      "require": {
+        "types": "./dist/iut/cs/timetable/index.d.ts",
+        "default": "./dist/iut/cs/timetable/index.js"
+      }
+    },
+    "./iut/signatures": {
+      "import": {
+        "types": "./dist/iut/signatures/index.d.mts",
+        "default": "./dist/iut/signatures/index.mjs"
+      },
+      "require": {
+        "types": "./dist/iut/signatures/index.d.ts",
+        "default": "./dist/iut/signatures/index.js"
+      }
     }
   },
   "main": "./dist/index.js",
@@ -45,15 +81,14 @@
     "@literate.ink/pdf-inspector": "^1.0.0",
     "@scure/base": "^2.0.0",
     "cheerio": "^1.1.2",
-    "luxon": "^3.5.0",
-    "schwi": "^0.7.0"
+    "luxon": "^3.7.2",
+    "schwi": "^0.8.0"
   },
   "devDependencies": {
     "@types/bun": "^1.2.23",
-    "@types/luxon": "^3.4.2",
+    "@types/luxon": "^3.7.1",
     "@vexcited/eslint-config": "^0.1.1",
-    "dotenv": "^16.4.5",
-    "eslint": "^9.24.0",
+    "eslint": "^9.37.0",
     "jiti": "^2.6.1",
     "terser": "^5.44.0",
     "tsdown": "^0.15.6",

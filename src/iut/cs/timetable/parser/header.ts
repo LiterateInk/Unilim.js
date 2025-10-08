@@ -2,6 +2,7 @@ import type { Page } from "@literate.ink/pdf-inspector";
 
 import { DateTime } from "luxon";
 import { DATE_TIME_OPTIONS } from "../utils/date";
+
 import { type FillBounds, getFillBounds, getTextsInFillBounds } from "./bounds";
 import { COLORS } from "./constants";
 

@@ -1,4 +1,5 @@
 import type { TimetableLesson } from "./lessons";
+
 import { type Page, parsePDF } from "@literate.ink/pdf-inspector";
 import { getTimetableGroups } from "./groups";
 import { getTimetableHeader, type TimetableHeader } from "./header";
@@ -22,7 +23,7 @@ export const getTimetable = (page: Page): Timetable => {
   };
 };
 
-export const getTimetableFromBuffer = async (buffer: ArrayBuffer | ArrayBufferLike | Buffer): Promise<Timetable> => {
+export const getTimetableFromBuffer = async (buffer: ArrayBuffer): Promise<Timetable> => {
   const pages = await parsePDF(buffer);
   return getTimetable(pages[0]);
 };

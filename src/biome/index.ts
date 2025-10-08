@@ -1,8 +1,9 @@
-import type { CAS } from "../cas";
 import type { Profile } from "./models";
 import { base64nopad } from "@scure/base";
 import { HeaderKeys, HttpRequest, HttpRequestMethod, send } from "schwi";
-import { OAuth2 } from "../cas/models";
+import { type CAS, OAuth2 } from "~cas";
+
+export * from "./models";
 
 export class Biome {
   public static readonly oauth2 = new OAuth2("biome-prod", "https://biome.unilim.fr/authentication/callback", ["openid", "profile", "email"]);
@@ -37,8 +38,8 @@ export class Biome {
   }
 
   public static async fromCAS(cas: CAS): Promise<Biome> {
-    const callback = await cas.authorize(Biome.oauth2);
-    const { access_token: oAuthToken } = await cas.tokenize(callback, Biome.oauth2);
+    const callback = await cas.authorize(Biome.oauth2, true);
+    const { access_token: oAuthToken } = await cas.tokenize(callback, Biome.oauth2, true);
 
     const request = new HttpRequest.Builder(Biome.HOST + "/api/login_check")
       .setMethod(HttpRequestMethod.POST)

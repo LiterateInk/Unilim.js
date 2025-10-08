@@ -1,4 +1,4 @@
-import { CAS } from "unilim";
+import { CAS } from "unilim/cas";
 
 const cas = await CAS.initialize(Bun.env.USERNAME!, Bun.env.PASSWORD!);
 console.log("You're now authenticated through the cookied", cas.lemonldap);

@@ -1,15 +1,9 @@
-import { cas, iut } from "unilim";
-
-import { credentials } from "../../_credentials";
+import { CAS, Services } from "unilim/cas";
+import { Signatures } from "unilim/iut/signatures";
 
 void (async function main() {
-  const state = await iut.signatures.createAuthorizeClientState();
+  const cas = await CAS.initialize(Bun.env.USERNAME!, Bun.env.PASSWORD!);
+  const signatures = await Signatures.fromCAS(cas);
 
-  // we authenticate to the CAS.
-  const cookie = await cas.login(credentials.username, credentials.password);
-
-  // we generate a ticket URL for an external service.
-  const callbackURL = await cas.authorize(cookie, cas.EXTERNAL_CLIENTS.IUT_SIGNATURES, state);
-
-  // TODO
+  console.log(signatures.session);
 }());
