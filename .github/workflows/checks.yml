@@ -20,9 +20,7 @@ jobs:
           bun-version: latest
 
       - run: bun install --frozen-lockfile
-      - run: bun run build
-      - run: bun install
-        working-directory: examples
+      - run: bun run build && bun install
       - run: bun eslint
       #- run: bun test
       - run: bun tsc

@@ -1,3 +1,3 @@
 [build]
-  command = "bunx typedoc"
+  command = "bun run build && bun install && bunx typedoc"
   publish = "docs"
