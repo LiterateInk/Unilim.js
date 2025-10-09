@@ -1,5 +1,8 @@
 import type { TimetableYear } from "../models/TimetableYear";
+import type { Timetable } from "../parser";
 import { DateTime } from "luxon";
+import { HttpRequest, send } from "schwi";
+import { getTimetableFromBuffer } from "../parser";
 import { DATE_TIME_OPTIONS } from "../utils/date";
 import { OnlineTimetable } from "./OnlineTimetable";
 
@@ -44,5 +47,15 @@ export class OnlineTimetableFileEntry {
     this.weekNumber = parseInt(fileName.replace(/(A(.*)_S)|(.pdf)/g, ""));
     this.fromYear = fromYear;
     this.url = new URL(`${OnlineTimetable.HOST}/${fromYear}/${fileName}`);
+  }
+
+  public async getTimetable(): Promise<Timetable> {
+    const request = new HttpRequest.Builder(this.url)
+      .build();
+
+    const response = await send(request);
+    const buffer = await response.toArrayBuffer();
+
+    return getTimetableFromBuffer(buffer);
   }
 }
