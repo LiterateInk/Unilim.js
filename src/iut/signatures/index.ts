@@ -6,7 +6,7 @@ export class Signatures {
   public static readonly COOKIE = "session";
 
   public static readonly HOST = "https://signatures.unilim.fr";
-  public static readonly oauth2 = new OAuth2("signatures", "https://signatures.unilim.fr/callback", ["openid", "profile"]);
+  public static readonly oauth2: OAuth2 = new OAuth2("signatures", "https://signatures.unilim.fr/callback", ["openid", "profile"]);
 
   public constructor(
     public readonly session: string
