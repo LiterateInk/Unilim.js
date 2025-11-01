@@ -1,6 +1,0 @@
-{
-  "name": "@unilim/examples",
-  "dependencies": {
-    "unilim": ".."
-  }
-}

@@ -1,4 +1,4 @@
-import { defineConfig } from "tsdown";
+import { defineConfig } from "bunup";
 
 export default defineConfig({
   clean: true,
@@ -12,6 +12,5 @@ export default defineConfig({
   format: ["cjs", "esm"],
   minify: true,
   outDir: "dist",
-  sourcemap: true,
-  treeshake: true
+  splitting: false
 });
