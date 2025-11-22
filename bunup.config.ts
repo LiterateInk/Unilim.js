@@ -12,5 +12,6 @@ export default defineConfig({
   format: ["cjs", "esm"],
   minify: true,
   outDir: "dist",
-  splitting: false
+  splitting: false,
+  target: "browser"
 });
