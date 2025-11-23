@@ -1,5 +1,6 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "unilim",
@@ -9,6 +10,7 @@
         "cheerio": "^1.1.2",
         "luxon": "^3.7.2",
         "schwi": "^0.8.0",
+        "smol-totp": "^1.0.0",
       },
       "devDependencies": {
         "@types/bun": "^1.2.23",
@@ -166,6 +168,8 @@
     "@literate.ink/pdf-inspector": ["@literate.ink/pdf-inspector@1.0.0", "", {}, "sha512-hlRFth61+1OUSw38Im86ot1ANFU4V2zGMLvmPEsWsIFY1s3y3ywCXw0KLGSaKWxk7auijr5SgXZxZlUolyGSkw=="],
 
     "@napi-rs/wasm-runtime": ["@napi-rs/wasm-runtime@1.0.7", "", { "dependencies": { "@emnapi/core": "^1.5.0", "@emnapi/runtime": "^1.5.0", "@tybys/wasm-util": "^0.10.1" } }, "sha512-SeDnOO0Tk7Okiq6DbXmmBODgOAb9dp9gjlphokTUxmt8U3liIP1ZsozBahH69j/RJv+Rfs6IwUKHTgQYJ/HBAw=="],
+
+    "@noble/hashes": ["@noble/hashes@2.0.1", "", {}, "sha512-XlOlEbQcE9fmuXxrVTXCTlG2nlRXa9Rj3rr5Ue/+tX+nmkgbX720YHh0VR3hBF9xDvwnb8D2shVGOwNx+ulArw=="],
 
     "@nodelib/fs.scandir": ["@nodelib/fs.scandir@2.1.5", "", { "dependencies": { "@nodelib/fs.stat": "2.0.5", "run-parallel": "^1.1.9" } }, "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="],
 
@@ -944,6 +948,8 @@
     "signal-exit": ["signal-exit@3.0.7", "", {}, "sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ=="],
 
     "slash": ["slash@3.0.0", "", {}, "sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q=="],
+
+    "smol-totp": ["smol-totp@1.0.0", "", { "dependencies": { "@noble/hashes": "^2.0.1", "@scure/base": "^2.0.0" } }, "sha512-ShYmqo8lnd/8khC0uM1SyJRPCv3mrWzQCJ0DYMC3yvZr/TqMt+Ic1wK3WBt/dQw8NVVWWbPxDJUQMqyk4U7nbw=="],
 
     "source-map": ["source-map@0.5.7", "", {}, "sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ=="],
 

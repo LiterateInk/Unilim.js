@@ -2,7 +2,9 @@ import { defineConfig } from "bunup";
 
 export default defineConfig({
   clean: true,
-  dts: true,
+  dts: {
+    inferTypes: true
+  },
   entry: [
     "src/biome/index.ts",
     "src/cas/index.ts",
