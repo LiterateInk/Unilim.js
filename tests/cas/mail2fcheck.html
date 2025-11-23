@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+ <title trspan="authPortal">Authentication portal</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <meta http-equiv="Content-Script-Type" content="text/javascript" />
+ <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+ <meta http-equiv="Pragma" content="no-cache" />
+ <meta http-equiv="Expires" content="0" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <link rel="stylesheet" type="text/css" href="/static/bwr/bootstrap/dist/css/bootstrap.min.css" />
+ <link rel="stylesheet" type="text/css" href="/static/bwr/font-awesome/css/font-awesome.min.css" />
+ <link rel="stylesheet" type="text/css" href="/static/unilim/css/styles.css" />
+ <link rel="stylesheet" type="text/css" href="/portal.css" />
+
+ <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+ <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+ <!--[if lt IE 9]>
+   <script type="text/javascript" src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+   <script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+ <![endif]-->
+ <link href="/static/unilim/favicon.png" rel="icon" type="image/vnd.microsoft.icon" sizes="16x16 32x32 48x48 64x64 128x128" />
+ <link href="/static/unilim/favicon.png" rel="shortcut icon" type="image/vnd.microsoft.icon" sizes="16x16 32x32 48x48 64x64 128x128" />
+
+  <!-- Load javascript common to all skins -->
+  <script type="text/javascript" src="/static/bwr/jquery/dist/jquery.min.js?v=xiahbXUP"></script>
+  <script type="text/javascript" src="/static/bwr/jquery-ui/jquery-ui.min.js?v=xiahbXUP"></script>
+  <script type="text/javascript" src="/static/bwr/jquery.cookie/jquery.cookie.min.js?v=xiahbXUP"></script>
+
+
+
+ <script type="application/init">
+ {
+ "choicetab":"",
+ "language": "en",
+ "newwindow":0,
+ "appslistorder":"",
+ "activeTimer":0,
+ "pingInterval":0,
+ "trOver":{"en":{"PE0":"Login or password issue","PE4":"Get Unilim account","anotherInformation":"Need help ?"},"fr":{"PE4":"Activer mon compte Unilim","PE0":"Identifiant ou mot de passe perdu ?","anotherInformation":"Besoin d'aide ?"},"all":{}},
+ "enablePasswordDisplay":0,
+ "dontStorePassword":0,
+ "scrollTop":400,
+ "floatingCategory":"",
+ "sameSite":"Lax",
+ "cookieSecure":1
+ }
+ </script>
+
+
+  <script type="text/javascript" src="/static/unilim/js/skin.min.js"></script>
+  <script type="text/javascript" src="/static/common/js/portal.min.js"></script>
+  <script type="text/javascript" src="/static/bwr/bootstrap/dist/js/bootstrap.min.js"></script>
+
+ <!-- Custom <head> markups, like CSS, js, etc. -->
+<!-- <link rel="stylesheet" href="/static/unilim/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- <link rel="stylesheet" href="/static/unilim/css/font-awesome.min.css"> -->
+<link rel="stylesheet" type="text/css" href="/static/unilim/icons/style.css" />
+<link rel="stylesheet" type="text/css" href="/static/unilim/css/material-dashboard.css" />
+<link rel="stylesheet" type="text/css" href="/static/unilim/css/custom.css" />
+
+</head>
+<body>
+  <div id="wrap">
+    <div id="header">    <!-- Custom HTML header -->
+<!--
+    <img src="/static/logo-universite-1.png" class="img-fluid rounded mx-auto d-block" />
+ -->
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse justify-content-end">
+      <ul class="navbar-nav ul-top-menu">
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link" href="#" id="message">
+            <i class="material-icons">notifications</i>
+          </a>
+        </li> -->
+        <li>
+          <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+            <label class="custom-control-label" for="darkSwitch"> <i class="fa fa-adjust"></i></label>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+</div>
+
+
+
+<main id="logincontent" class="container">
+
+<div class="message message-positive alert"><span trspan="enterMail2fCode"></span></div>
+
+<div class="card">
+
+<form action="/mail2fcheck?skin=unilim" method="post" class="password" role="form">
+  <div class="form">
+    <input type="hidden" id="token" name="token" value="1763814448_36634" />
+    <input type="hidden" id="checkLogins" name="checkLogins" value="" />
+      <input type="hidden" name="skin" value="unilim" />
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><label for="extcode" class="mb-0"><i class="fa fa-lock"></i></label></span>
+      </div>
+      <input id="ul-focus" name="code" value="" type="text" class="form-control" id="extcode" trplaceholder="code" autocomplete="off" autofocus />
+    </div>
+  </div>
+  <div class="buttons">
+    <button type="submit" class="btn btn-success">
+      <span class="fa fa-sign-in"></span>
+      <span trspan="connect">Connect</span>
+    </button>
+  </div>
+  <div class="buttons">
+  <a href="https://cas.unilim.fr/?cancel=1&skin=unilim" class="btn btn-primary" role="button">
+    <span class="fa fa-home"></span>
+    <span trspan="cancel">Cancel</span>
+  </a>
+  </div>
+</form>
+</div>
+</main>
+
+  </div> <!--wrap-->
+
+  <div id="footer">
+    <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 col-10">
+      <!-- Custom HTML footer -->
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" href="https://www.unilim.fr"  target="_blank">Université de Limoges</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://support.unilim.fr" target="_blank"><span trspan="anotherInformation"></a>
+  </li>
+</ul>
+
+
+<script type="text/javascript" src="/index.psgi/psgi.js"></script>
+<!-- <script type="text/javascript" src="/static/unilim/assets/js/core/jquery.min.js"></script> -->
+<script type="text/javascript" src="/static/unilim/assets/js/core/popper.min.js"></script>
+<script type="text/javascript" src="/static/unilim/assets/js/core/bootstrap-material-design.min.js"></script>
+<script type="text/javascript" src="/static/unilim/assets/js/plugins/bootstrap-notify.js"></script>
+<script type="text/javascript" src="/static/unilim/assets/js/material-dashboard.js"></script>
+<script type="text/javascript" src="/static/unilim/icons/liga.js"></script>
+<script type="text/javascript" src="/static/unilim/js/custom.js"></script>
+
+
+
+
+    </div>
+
+    <div class="col-md-2 col-2 text-right">
+      <span id="languages"></span>
+    </div>
+
+    </div>
+  </div>
+
+<!-- Constants -->
+<script type="text/JavaScript" src="/index.psgi/psgi.js"></script>
+</body>
+</html>
