@@ -3,7 +3,7 @@ name: Publish
 on:
   push:
     tags:
-      - '*.*.*'
+      - "*.*.*"
 
 jobs:
   publish:
@@ -23,10 +23,8 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24
-          registry-url: 'https://registry.npmjs.com'
+          registry-url: "https://registry.npmjs.com"
 
-      - env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          bun install && bun run build
+      - run: |
+          bun install --frozen-lockfile && bun run build
           npm publish --provenance --access public
