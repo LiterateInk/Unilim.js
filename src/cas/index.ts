@@ -1,34 +1,183 @@
-import type { OAuth2, Services, Tokens, User } from "./models";
+import type { CheerioAPI } from "cheerio";
 import { HeaderKeys, HttpRequest, HttpRequestMethod, HttpRequestRedirection, send } from "schwi";
-
+import { totp as generate } from "smol-totp";
+import { NoCasToken, type OAuth2, type Services, type Tokens, type User } from "./models";
 export * from "./models";
+
+export class PendingAuth {
+  public readonly isEmailAvailable: boolean = false;
+  public readonly isTotpAvailable: boolean = false;
+  public solved: boolean;
+
+  /**
+   * Extracted hidden fields from received <form> that we'll send back.
+   *
+   * Most of the properties in there are useless,
+   * but for bundle size reasons, we won't filter them out.
+   */
+  private fields: Record<string, string> = {};
+
+  /** @internal */
+  public constructor(
+    private document: CheerioAPI
+  ) {
+    const form = document("form");
+
+    this.solved = form.attr("action") === "/registerbrowser";
+    this.extractFields();
+
+    if (!this.solved) {
+      const buttons = form.find("button[name=sf]").toArray();
+
+      this.isTotpAvailable = Boolean(buttons.find(
+        (button) => button.attribs.value === "totp"
+      ));
+
+      this.isEmailAvailable = Boolean(buttons.find(
+        (button) => button.attribs.value === "mail"
+      ));
+    }
+  }
+
+  /**
+   * Finish authentication sequence.
+   *
+   * This method will call the `registerbrowser` API to enable
+   * persistence and be able to re-authenticate in the future
+   * without having to manually solve the 2FA challenge.
+   */
+  public async finish(): Promise<CAS> {
+    if (!this.solved) throw new Error("2fa not solved");
+
+    const key = this.fields.totpsecret?.toUpperCase(); // `?` since it might be undefined!
+    if (!key) throw new Error("'totpsecret' is not available");
+
+    const totp = generate(key);
+    this.fields.fg = "TOTP_" + totp;
+
+    const body = new URLSearchParams(this.fields);
+
+    const request = new HttpRequest.Builder(CAS.HOST + "/registerbrowser")
+      .setRedirection(HttpRequestRedirection.MANUAL)
+      .setMethod(HttpRequestMethod.POST)
+      .setFormUrlEncodedBody(body)
+      .build();
+
+    const response = await send(request);
+    const cookies = response.headers.getSetCookie();
+
+    const toKV = (cookie: string): string =>
+      cookie.split(";")[0].split("=")[1];
+
+    const lemonldap = cookies.find((cookie) => cookie.startsWith(CAS.COOKIE + "="));
+    const llngconnection = cookies.find((cookie) => cookie.startsWith(CAS.PERSIST_COOKIE + "="));
+
+    if (!lemonldap || !llngconnection)
+      throw new Error("bad auth");
+
+    return new CAS(
+      toKV(lemonldap),
+      toKV(llngconnection),
+      key
+    );
+  }
+
+  public async sendEmailCode(): Promise<void> {
+    return this.use("mail");
+  }
+
+  public async solveWithEmailCode(code: string): Promise<void> {
+    return this.solve("mail2fcheck", code);
+  }
+
+  public async solveWithTotp(totp: string): Promise<void> {
+    await this.use("totp");
+    return this.solve("totp2fcheck", totp);
+  }
+
+  private extractFields(): void {
+    this.fields = {};
+
+    this.document("form").find("input[type=hidden]").each((_, input) => {
+      const key = input.attribs.name;
+      const value = input.attribs.value || "";
+
+      this.fields[key] = value;
+    });
+  }
+
+  private async solve(method: string, code: string): Promise<void> {
+    this.fields.code = code;
+    this.fields.stayconnected = "on"; // in case it is missing.
+
+    const body = new URLSearchParams(this.fields);
+
+    const request = new HttpRequest.Builder(CAS.HOST + "/" + method)
+      .setMethod(HttpRequestMethod.POST)
+      .setFormUrlEncodedBody(body)
+      .build();
+
+    const response = await send(request);
+    this.document = await response.toHTML();
+    this.extractFields();
+    this.solved = true;
+  }
+
+  private async use(choice: string): Promise<void> {
+    this.fields.sf = choice;
+    const body = new URLSearchParams(this.fields);
+
+    const request = new HttpRequest.Builder(CAS.HOST + "/2fchoice")
+      .setMethod(HttpRequestMethod.POST)
+      .setFormUrlEncodedBody(body)
+      .build();
+
+    const response = await send(request);
+    this.document = await response.toHTML();
+    this.extractFields();
+  }
+}
 
 export class CAS {
   public static readonly COOKIE = "lemonldap";
-
-  // URL is a workaround to bypass MFA: it hosts a `cloudflared` instance
-  // using the internal hosting services that proxies `cas.unilim.fr`.
-  public static readonly HOST = "https://cu-proxy.vexcited.com";
+  public static readonly HOST = "https://cas.unilim.fr";
+  public static readonly PERSIST_COOKIE = "llngconnection";
 
   public constructor(
     /**
-     * An authenticated session cookie.
+     * Your `lemonldap` session cookie, it is used to perform requests.
      */
-    public readonly lemonldap: string
-  ) {}
+    public readonly cookie: string,
+
+    /**
+     * A persistence cookie.
+     *
+     * You can provide this to the {@link restore} method to
+     * re-authenticate without needing to manually solve 2FA.
+     */
+    public readonly connection: string,
+
+    /**
+     * TOTP key generated by the persistence cookie.
+     * Also needed to re-authenticate without manually solving 2FA.
+     */
+    public readonly key: string
+  ) { }
 
   /**
-   * Authenticates through the CAS with the given
-   * `username` and `password`.
+   * Try to create a new session with the CAS by trying to obtain
+   * the authentication form and submit it.
+   *
+   * Once created, you'll be given a {@link PendingAuth}
+   * instance to continue the authentication process.
    */
-  public static async initialize(username: string, password: string): Promise<CAS> {
-    const token = await this.getTokenCSRF();
+  public static async initialize(username: string, password: string): Promise<PendingAuth> {
+    const token = await this.getInitialTokenCSRF();
 
     const body = new URLSearchParams({
       password,
+      stayconnected: "on",
       token,
-      // -> btoa("https://cas.unilim.fr/cas")
-      url: "aHR0cHM6Ly9jYXMudW5pbGltLmZyL2Nhcw==",
       user: username
     });
 
@@ -39,13 +188,24 @@ export class CAS {
       .build();
 
     const response = await send(request);
+    const document = await response.toHTML();
 
-    const cookies = response.headers.getSetCookie();
-    const cookie = cookies.find((cookie) => cookie.startsWith(CAS.COOKIE + "="));
+    // Let's delegate everything to PendingAuth.
+    return new PendingAuth(document);
+  }
 
-    if (!cookie) throw new Error("bad authentication");
-    const lemonldap = cookie.split(";")[0].split("=")[1];
-    return new CAS(lemonldap);
+  /**
+   * Return a new CAS instance by using the provided `cookie`.
+   * This might be useful for temporary usage.
+   *
+   * {@link connection} and {@link key} will be empty strings,
+   * you won't be able to restore the session with this method.
+   *
+   * If you prefer to do a whole authentication process,
+   * you might want to use {@link initialize}.
+   */
+  public static temporary(cookie: string): CAS {
+    return new CAS(cookie, "", "");
   }
 
   /**
@@ -54,22 +214,20 @@ export class CAS {
    * It retries 5 times before failing: sometimes an information
    * page is shown and we need to refresh the page to dismiss it.
    */
-  private static async getTokenCSRF(retries = 0): Promise<string> {
-    const request = new HttpRequest.Builder(CAS.HOST).build();
-    const response = await send(request);
+  private static async getInitialTokenCSRF(): Promise<string> {
+    const MAX_RETRIES = 5;
 
-    const $ = await response.toHTML();
-    const token = $("input#token").attr("value");
+    for (let _ = 0; _ < MAX_RETRIES; _++) {
+      const request = new HttpRequest.Builder(CAS.HOST).build();
+      const response = await send(request);
 
-    if (!token) {
-      if (retries < 5) {
-        return this.getTokenCSRF(retries + 1);
-      }
+      const document = await response.toHTML();
+      const token = document("#token").attr("value");
 
-      throw new Error("CAS token not found in HTML");
+      if (token) return token;
     }
 
-    return token;
+    throw new NoCasToken();
   }
 
   /**
@@ -94,17 +252,17 @@ export class CAS {
 
     const request = new HttpRequest.Builder(url)
       .setRedirection(HttpRequestRedirection.MANUAL)
-      .setCookie(CAS.COOKIE, this.lemonldap)
+      .setCookie(CAS.COOKIE, this.cookie)
       .build();
 
     const response = await send(request);
 
     let location = response.headers.get("location");
 
-    // We're prompted to accept the OAuth2.0
+    // We're prompted to accept the OAuth2
     if (response.status === 200 && !location) {
-      const $ = await response.toHTML();
-      const confirm = $("#confirm").attr("value");
+      const document = await response.toHTML();
+      const confirm = document("#confirm").attr("value");
 
       if (confirm) {
         const body = new URLSearchParams({
@@ -125,7 +283,7 @@ export class CAS {
         const request = new HttpRequest.Builder(url)
           .setMethod(HttpRequestMethod.POST)
           .setRedirection(HttpRequestRedirection.MANUAL)
-          .setCookie(CAS.COOKIE, this.lemonldap)
+          .setCookie(CAS.COOKIE, this.cookie)
           .setFormUrlEncodedBody(body)
           .build();
 
@@ -156,7 +314,7 @@ export class CAS {
 
     const request = new HttpRequest.Builder(url)
       .setRedirection(HttpRequestRedirection.MANUAL)
-      .setCookie(CAS.COOKIE, this.lemonldap)
+      .setCookie(CAS.COOKIE, this.cookie)
       .build();
 
     const response = await send(request);
