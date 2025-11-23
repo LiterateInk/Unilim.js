@@ -1,4 +1,5 @@
 import type { CheerioAPI } from "cheerio";
+import type { HttpResponse } from "schwi";
 import { HeaderKeys, HttpRequest, HttpRequestMethod, HttpRequestRedirection, send } from "schwi";
 import { totp as generate } from "smol-totp";
 import { NoCasToken, type OAuth2, type Services, type Tokens, type User } from "./models";
@@ -108,7 +109,7 @@ export class PendingAuth {
 
   private async solve(method: string, code: string): Promise<void> {
     this.fields.code = code;
-    this.fields.stayconnected = "on"; // in case it is missing.
+    this.fields.stayconnected = "1"; // in case it is missing.
 
     const body = new URLSearchParams(this.fields);
 
@@ -176,7 +177,7 @@ export class CAS {
 
     const body = new URLSearchParams({
       password,
-      stayconnected: "on",
+      stayconnected: "1",
       token,
       user: username
     });
@@ -184,7 +185,6 @@ export class CAS {
     const request = new HttpRequest.Builder(CAS.HOST)
       .setMethod(HttpRequestMethod.POST)
       .setFormUrlEncodedBody(body)
-      .setRedirection(HttpRequestRedirection.MANUAL)
       .build();
 
     const response = await send(request);
@@ -192,6 +192,57 @@ export class CAS {
 
     // Let's delegate everything to PendingAuth.
     return new PendingAuth(document);
+  }
+
+  public static async restore(
+    username: string, password: string,
+    llngconnection: string, key: string
+  ): Promise<CAS> {
+    let body: URLSearchParams, request: HttpRequest, response: HttpResponse;
+
+    body = new URLSearchParams({
+      password,
+      token: await this.getInitialTokenCSRF(),
+      user: username
+    });
+
+    request = new HttpRequest.Builder(CAS.HOST)
+      .setMethod(HttpRequestMethod.POST)
+      .setFormUrlEncodedBody(body)
+      .setCookie(CAS.PERSIST_COOKIE, llngconnection)
+      .build();
+
+    response = await send(request);
+
+    const document = await response.toHTML();
+    const token = this.extractTokenCSRF(document);
+    if (!token) throw new NoCasToken();
+
+    body = new URLSearchParams({
+      fg: "TOTP_" + generate(key),
+      token,
+      usetotp: "1"
+    });
+
+    request = new HttpRequest.Builder(CAS.HOST + "/checkbrowser")
+      .setRedirection(HttpRequestRedirection.MANUAL)
+      .setMethod(HttpRequestMethod.POST)
+      .setFormUrlEncodedBody(body)
+      .setCookie(CAS.PERSIST_COOKIE, llngconnection)
+      .build();
+
+    response = await send(request);
+
+    const cookies = response.headers.getSetCookie();
+    let lemonldap = cookies.find((cookie) => cookie.startsWith(CAS.COOKIE + "="));
+    if (!lemonldap) throw new Error("bad persistence");
+    lemonldap = lemonldap.split(";")[0].split("=")[1];
+
+    return new CAS(
+      lemonldap,
+      llngconnection,
+      key
+    );
   }
 
   /**
@@ -208,6 +259,11 @@ export class CAS {
     return new CAS(cookie, "", "");
   }
 
+  private static extractTokenCSRF(document: CheerioAPI): string | undefined {
+    const token = document("input[name=token]").attr("value");
+    if (token) return token;
+  }
+
   /**
    * Tries to retrieve the CSRF token from the CAS login portal.
    *
@@ -222,7 +278,7 @@ export class CAS {
       const response = await send(request);
 
       const document = await response.toHTML();
-      const token = document("#token").attr("value");
+      const token = this.extractTokenCSRF(document);
 
       if (token) return token;
     }
