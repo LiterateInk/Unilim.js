@@ -42,7 +42,7 @@ export class Signatures {
       request = new HttpRequest.Builder(callback)
         .setRedirection(HttpRequestRedirection.MANUAL)
         .setCookie(Signatures.COOKIE, session)
-        .setCookie(CAS.COOKIE, cas.lemonldap)
+        .setCookie(CAS.COOKIE, cas.cookie)
         .enableUnauthorizedTLS()
         .build();
 
