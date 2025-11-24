@@ -139,6 +139,11 @@ export class Signatures {
           }
         }
       }
+
+      semesters.push({
+        name: text(document(button)),
+        units
+      });
     }
 
     const [fullName, promotion] = document(".list-group-item").map((_, node) =>
