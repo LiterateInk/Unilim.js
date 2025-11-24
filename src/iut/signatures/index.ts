@@ -156,4 +156,19 @@ export class Signatures {
       semesters
     };
   }
+
+  public async dump(): Promise<ReportCard> {
+    const html = await this.getHtml();
+    return Signatures.parse(html);
+  }
+
+  public async getHtml(): Promise<string> {
+    const request = new HttpRequest.Builder(Signatures.HOST)
+      .setCookie(Signatures.COOKIE, this.session)
+      .enableUnauthorizedTLS()
+      .build();
+
+    const response = await send(request);
+    return response.toString();
+  }
 }
