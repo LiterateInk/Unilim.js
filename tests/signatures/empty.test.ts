@@ -13,7 +13,7 @@ describe("iut/signatures", () => {
     expect(Signatures.oauth2.scopes).toEqual(["openid", "profile"]);
   });
 
-  // it("should parse correctly the report card", () => {
-  //   const report = Signatures.parse(html as unknown as string);
-  // });
+  it("should parse correctly the report card", () => {
+    const report = Signatures.parse(html as unknown as string);
+  });
 });

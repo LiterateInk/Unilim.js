@@ -6,7 +6,7 @@ import { type CAS, OAuth2 } from "~cas";
 export * from "./models";
 
 export class Biome {
-  public static readonly oauth2: OAuth2 = new OAuth2("biome-prod", "https://biome.unilim.fr/authentication/callback", ["openid", "profile", "email"]);
+  public static readonly oauth2 = new OAuth2("biome-prod", "https://biome.unilim.fr/authentication/callback", ["openid", "profile", "email"]);
   private static readonly HOST = "https://apis.unilim.fr";
 
   public get roles(): Array<string> {

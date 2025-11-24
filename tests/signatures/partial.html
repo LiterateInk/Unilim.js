@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulletin</title>
+    <!-- Lien vers le CSS Bootstrap et Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <div class="container mt-5">
+        <a href="/logout" class="btn btn-outline-primary float-end" role="button">Déconnexion</a>
+        <h1 class="mb-4">Bulletin de notes provisoire</h1>
+
+        <ul class="list-group mb-4">
+            <li class="list-group-item"><strong>Étudiant : </strong> JOHN DOE</li>
+            <li class="list-group-item"><strong>Classe : </strong> Année 3</li>
+        </ul>
+
+        <div class="container">
+	        <div class="alert alert-danger" role="alert"><b>Ce bulletin de note provisoire vous est fourni à titre informatif, et n'est en aucun cas officiel. Seul le jury est en capacité de délivrer un bulletin de notes officiel. De même, les contrôles et leurs coefficients sont provisoires, et sont susceptibles d'évoluer à tout	instant, sans préavis.</b>
+	        </div>
+        </div>
+
+        <!-- Onglets pour chaque semestre -->
+        <ul class="nav nav-tabs" id="semestreTabs" role="tablist">
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="semestre-S5-tab" data-bs-toggle="tab" data-bs-target="#semestre-S5" type="button" role="tab" aria-controls="semestre-S5" aria-selected="true">
+                    Semestre 5
+                </button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link " id="semestre-S6-tab" data-bs-toggle="tab" data-bs-target="#semestre-S6" type="button" role="tab" aria-controls="semestre-S6" aria-selected="false">
+                    Semestre 6
+                </button>
+            </li>
+
+        </ul>
+
+        <!-- Contenu des onglets -->
+        <div class="tab-content mt-3" id="semestreTabsContent">
+
+            <div class="tab-pane fade show active" id="semestre-S5" role="tabpanel" aria-labelledby="semestre-S5-tab">
+
+                <!-- Tableau commun pour tous les niveaux -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Nom</th>
+                            <th style="width: 80px;">ABS</th>
+                            <!-- si controle.commentaire est défini -->
+
+                            <th class="coefficient">Coef.</th>
+                            <th class="moyenne">Moy.</th>
+                            <th class="moyenne_classe">(Classe)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- Ligne pour l'UE (niveau 1) -->
+                        <tr class="level-1">
+                            <td class="code"><i class="fas fa-university"></i> UE 5.1</td>
+                            <td class="nom">Réaliser un développement d&#39;application</td>
+                            <td></td>
+                            <!-- si controle.commentaire est défini -->
+
+                            <td class="coefficient">10.0</td>
+                            <td class="moyenne">13.0</td>
+                            <td class="moyenne_classe"></td>
+                        </tr>
+                        <!-- Modules sous chaque UE -->
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.02</td>
+                                <td>Projet personnel et professionnel</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.1</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.04</td>
+                                <td>Qualité algorithmique</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.2</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.05</td>
+                                <td>Programmation avancée</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.9</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.06</td>
+                                <td>Sensibilisation à la programmation multimédia</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.2</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.07</td>
+                                <td>Automatisation de la chaîne de production</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.6</td>
+                                <td class="moyenne">13.0</td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code">20/11/2025</td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''>13.0</td>
+
+                                        <td class="moyenne_classe">(12.56)</td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.08</td>
+                                <td>Qualité de développement</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.7</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.09</td>
+                                <td>Virtualisation avancée</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.7</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.10</td>
+                                <td>Nouveaux paradigmes de base de données</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">1.1</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.13</td>
+                                <td>Économie durable et numérique</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.2</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.14</td>
+                                <td>Anglais</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.3</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> S5.A.01</td>
+                                <td>Développement avancé</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">5.0</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+
+                        <!-- Ligne pour l'UE (niveau 1) -->
+                        <tr class="level-1">
+                            <td class="code"><i class="fas fa-university"></i> UE 5.2</td>
+                            <td class="nom">Optimiser des applications</td>
+                            <td></td>
+                            <!-- si controle.commentaire est défini -->
+
+                            <td class="coefficient">10.0</td>
+                            <td class="moyenne"></td>
+                            <td class="moyenne_classe"></td>
+                        </tr>
+                        <!-- Modules sous chaque UE -->
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.02</td>
+                                <td>Projet personnel et professionnel</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.1</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.04</td>
+                                <td>Qualité algorithmique</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.6</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.05</td>
+                                <td>Programmation avancée</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.7</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.06</td>
+                                <td>Sensibilisation à la programmation multimédia</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.2</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.08</td>
+                                <td>Qualité de développement</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.5</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.09</td>
+                                <td>Virtualisation avancée</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.2</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.10</td>
+                                <td>Nouveaux paradigmes de base de données</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.4</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.11</td>
+                                <td>Méthodes d&#39;optimisation pour l&#39;aide à la décision</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.7</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.12</td>
+                                <td>Modélisations mathématiques</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">1.2</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.14</td>
+                                <td>Anglais</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.4</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> S5.A.01</td>
+                                <td>Développement avancé</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">5.0</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+
+                        <!-- Ligne pour l'UE (niveau 1) -->
+                        <tr class="level-1">
+                            <td class="code"><i class="fas fa-university"></i> UE 5.6</td>
+                            <td class="nom">Collaborer au sein d’une équipe informatique</td>
+                            <td></td>
+                            <!-- si controle.commentaire est défini -->
+
+                            <td class="coefficient">10.0</td>
+                            <td class="moyenne">15.519</td>
+                            <td class="moyenne_classe"></td>
+                        </tr>
+                        <!-- Modules sous chaque UE -->
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.01</td>
+                                <td>Initiation au management d&#39;une équipe de projet informatique</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.9</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.03</td>
+                                <td>Politique de communication</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">1.3</td>
+                                <td class="moyenne">16.1</td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code">12/11/2025</td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''>16.1</td>
+
+                                        <td class="moyenne_classe">(16.74)</td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.02</td>
+                                <td>Projet personnel et professionnel</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.4</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.06</td>
+                                <td>Sensibilisation à la programmation multimédia</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.3</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.07</td>
+                                <td>Automatisation de la chaîne de production</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.3</td>
+                                <td class="moyenne">13.0</td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.13</td>
+                                <td>Économie durable et numérique</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.5</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R5.A.14</td>
+                                <td>Anglais</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">1.3</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> S5.A.01</td>
+                                <td>Développement avancé</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">5.0</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-pane fade " id="semestre-S6" role="tabpanel" aria-labelledby="semestre-S6-tab">
+
+                <!-- Tableau commun pour tous les niveaux -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Nom</th>
+                            <th style="width: 80px;">ABS</th>
+                            <!-- si controle.commentaire est défini -->
+
+                            <th class="coefficient">Coef.</th>
+                            <th class="moyenne">Moy.</th>
+                            <th class="moyenne_classe">(Classe)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- Ligne pour l'UE (niveau 1) -->
+                        <tr class="level-1">
+                            <td class="code"><i class="fas fa-university"></i> UE 6.1</td>
+                            <td class="nom">Réaliser un développement d’application</td>
+                            <td></td>
+                            <!-- si controle.commentaire est défini -->
+
+                            <td class="coefficient">10.0</td>
+                            <td class="moyenne"></td>
+                            <td class="moyenne_classe"></td>
+                        </tr>
+                        <!-- Modules sous chaque UE -->
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> P6.A.01</td>
+                                <td>Portfolio</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.5</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R6.A.04</td>
+                                <td>Projet personnel et professionnel</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.1</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R6.A.05</td>
+                                <td>Développement avancé</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">2.1</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R6.A.06</td>
+                                <td>Maintenance applicative</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">1.8</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> S6.A.01</td>
+                                <td>Évolution d&#39;une application existante</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">1.0</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> S6.A.St</td>
+                                <td>Stage</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">4.5</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+
+                        <!-- Ligne pour l'UE (niveau 1) -->
+                        <tr class="level-1">
+                            <td class="code"><i class="fas fa-university"></i> UE 6.2</td>
+                            <td class="nom">Optimiser des applications</td>
+                            <td></td>
+                            <!-- si controle.commentaire est défini -->
+
+                            <td class="coefficient">10.0</td>
+                            <td class="moyenne"></td>
+                            <td class="moyenne_classe"></td>
+                        </tr>
+                        <!-- Modules sous chaque UE -->
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> P6.A.01</td>
+                                <td>Portfolio</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.5</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R6.A.04</td>
+                                <td>Projet personnel et professionnel</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.1</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R6.A.05</td>
+                                <td>Développement avancé</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">2.1</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R6.A.06</td>
+                                <td>Maintenance applicative</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">1.8</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> S6.A.01</td>
+                                <td>Évolution d&#39;une application existante</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">1.0</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> S6.A.St</td>
+                                <td>Stage</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">4.5</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+
+                        <!-- Ligne pour l'UE (niveau 1) -->
+                        <tr class="level-1">
+                            <td class="code"><i class="fas fa-university"></i> UE 6.6</td>
+                            <td class="nom">Collaborer au sein d’une équipe informatique</td>
+                            <td></td>
+                            <!-- si controle.commentaire est défini -->
+
+                            <td class="coefficient">10.0</td>
+                            <td class="moyenne"></td>
+                            <td class="moyenne_classe"></td>
+                        </tr>
+                        <!-- Modules sous chaque UE -->
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> P6.A.01</td>
+                                <td>Portfolio</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.5</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R6.01</td>
+                                <td>Initiation à l&#39;entrepreneuriat</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">1.2</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R6.02</td>
+                                <td>Droit du numérique et de la propriété intellectuelle</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">1.2</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R6.03</td>
+                                <td>Communication : organisation et diffusion de l&#39;information</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.7</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+                                <tr class="level-3">
+                                    <td class="code"></td>
+                                    <td>Moyenne
+                                        <!-- si controle.enseignant est défini-->
+
+                                    </td>
+                                    <td></td>
+                                    <!-- si controle.commentaire est défini -->
+
+                                    <td class="coefficient">1.0</td>
+                                    <td class="moyenne " data-toggle="tooltip" title=''></td>
+
+                                        <td class="moyenne_classe"></td>
+
+                                </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R6.A.04</td>
+                                <td>Projet personnel et professionnel</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.7</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> R6.A.05</td>
+                                <td>Développement avancé</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">0.2</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> S6.A.01</td>
+                                <td>Évolution d&#39;une application existante</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">1.0</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+                            <tr class="level-2">
+                                <td class="code"><i class="fas fa-book"></i> S6.A.St</td>
+                                <td>Stage</td>
+                                <td>
+                                    <!-- gestion des absences -->
+
+
+                                </td>
+                                <!-- si controle.commentaire est défini -->
+
+                                <td class="coefficient">4.5</td>
+                                <td class="moyenne"></td>
+                                <td class="moyenne_classe"></td>
+                            </tr>
+
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+<div class="container mt-5">
+    <!-- Bouton dropdown-toggle pour plier/déplier l'alerte -->
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#alertMessage" aria-expanded="false">
+        RGPD
+    </button>
+
+    <!-- Alerte pliable (pliée par défaut) -->
+    <div class="collapse mt-3" id="alertMessage">
+        <div class="alert alert-info" role="alert">
+            Les données personnelles collectées sont utilisées aux fins de collecte des notes, de calcul des moyennes provisoires, de présentation d'un bulletin provisoire aux étudiants et de suivi des absences. Elles sont utilisées par le personnel habilité de la DSI, le service de scolarité de l'IUT, les enseignants de l'IUT ainsi que les étudiants de l'IUT et seront conservées pour une durée de 1 an en base active et de 5 ans en archive.<br/><br/>
+            Conformément à la Loi Informatique et Libertés du 6 janvier 1978 modifiée, vous pouvez accéder et obtenir copie des données vous concernant, les faire rectifier ou les faire effacer. Vous disposez également d'un droit d'opposition, de limitation du traitement de vos données ainsi que du droit à la portabilité.<br/><br/>
+            Pour exercer ces droits ou pour toute question sur le traitement de vos données, vous pouvez contacter la déléguée à la protection des données par voie électronique : dpd@unilim.fr, ou par courrier postal à l'adresse de l'Université de Limoges.
+        </div>
+    </div>
+</div>
+
+<br><br><br><br><br><br>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
+</script>
+
+  </body>
+</html>
