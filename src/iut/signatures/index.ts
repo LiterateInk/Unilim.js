@@ -141,9 +141,9 @@ export class Signatures {
       }
     }
 
-    const [fullName, promotion] = document(".list-group-item").map((_, node) => {
-      return text(document(node.lastChild!));
-    }).toArray();
+    const [fullName, promotion] = document(".list-group-item").map((_, node) =>
+      text(document(node.lastChild!))
+    ).toArray();
 
     return {
       fullName,
