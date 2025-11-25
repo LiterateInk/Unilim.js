@@ -30,13 +30,16 @@ export class PendingAuth {
     if (!this.solved) {
       const buttons = form.find("button[name=sf]").toArray();
 
-      this.isTotpAvailable = Boolean(buttons.find(
-        (button) => button.attribs.value === "totp"
-      ));
-
-      this.isEmailAvailable = Boolean(buttons.find(
-        (button) => button.attribs.value === "mail"
-      ));
+      for (const button of buttons) {
+        switch (button.attribs.value) {
+          case "mail":
+            this.isEmailAvailable = true;
+            break;
+          case "totp":
+            this.isTotpAvailable = true;
+            break;
+        }
+      }
     }
   }
 
