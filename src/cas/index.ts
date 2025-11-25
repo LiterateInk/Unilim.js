@@ -102,7 +102,7 @@ export class PendingAuth {
   private extractFields(): void {
     this.fields = {};
 
-    this.document("form").find("input[type=hidden]").each((_, input) => {
+    this.document("form input[type=hidden]").each((_, input) => {
       const key = input.attribs.name;
       const value = input.attribs.value || "";
 
