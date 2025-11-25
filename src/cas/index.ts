@@ -87,16 +87,16 @@ export class PendingAuth {
   }
 
   public async sendEmailCode(): Promise<void> {
-    return this.use("mail");
+    await this.use("mail");
   }
 
   public async solveWithEmailCode(code: string): Promise<void> {
-    return this.solve("mail2fcheck", code);
+    await this.solve("mail2fcheck", code);
   }
 
   public async solveWithTotp(totp: string): Promise<void> {
     await this.use("totp");
-    return this.solve("totp2fcheck", totp);
+    await this.solve("totp2fcheck", totp);
   }
 
   private extractFields(): void {
