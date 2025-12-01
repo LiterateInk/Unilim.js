@@ -290,8 +290,11 @@ export class CAS {
   }
 
   /**
-   * Authorize an user through `/oauth2` route.
-   * @returns callback URL with authentication details
+   * Authorize a user through `/oauth2` route.
+   * @param client OAuth2 client configuration
+   * @param challenge Whether to use PKCE challenge, defaults to `false`
+   * @param state Optional state parameter
+   * @returns Callback URL with authentication details
    */
   public async authorize(client: OAuth2, challenge = false, state = ""): Promise<URL> {
     const url = new URL(CAS.HOST + "/oauth2/authorize");
@@ -386,8 +389,9 @@ export class CAS {
   /**
    * Retrieves CAS tokens using the authorized OAuth2.0 callback URL.
    *
-   * @param callback url created with {@link authorize} method
-   * @param client oauth2 linked to the url
+   * @param callback URL created with {@link authorize} method
+   * @param client OAuth2 linked to the URL
+   * @param challenge Whether PKCE challenge was used, defaults to `false`
    */
   public async tokenize(callback: URL, client: OAuth2, challenge = false): Promise<Tokens> {
     const code = callback.searchParams.get("code");
