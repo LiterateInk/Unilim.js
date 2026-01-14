@@ -12,6 +12,7 @@ export const BUT_INFO_REF = {
   "P5.01A": "Portfolio",
   "P5A.01": "Portfolio",
   "P6.01": "Portfolio",
+  "P6A.01": "Portfolio",
   "R1.10": "Anglais",
   "R1.11": "Communication",
   "R1.12": "Projet professionnel et personnel",
