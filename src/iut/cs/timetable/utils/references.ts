@@ -116,5 +116,6 @@ export const BUT_INFO_REF = {
   "S4.St": "Stage",
   "S5A.01": "Développement avancé",
   "S5A.02": "Développement avancé",
-  "S6A.01": "Évolution d'une application existante"
+  "S6A.01": "Évolution d'une application existante",
+  "S6A.02": "Évolution d'une application existante"
 };
