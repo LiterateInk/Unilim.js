@@ -94,6 +94,7 @@ export const BUT_INFO_REF = {
   "R6.02": "Droit du numérique et de la propriété intellectuelle",
   "R6.03": "Communication",
   "R6.04": "Projet personnel et professionnel",
+  "R6A.04": "Projet personnel et professionnel",
   "R6A.05": "Développement avancé",
   "R6A.06": "Maintenance applicative",
   "S1.01": "Implémentation d'un besoin client",
